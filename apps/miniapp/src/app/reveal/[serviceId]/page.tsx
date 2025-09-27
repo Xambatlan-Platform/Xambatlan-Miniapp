@@ -636,10 +636,41 @@ export default function RevealContactPage() {
                   <p className="text-sm text-gray-600 mb-4">
                     Your payment was successful! The provider has been notified and will respond shortly.
                   </p>
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
                     <p className="text-sm text-blue-700">
                       Request expires: {new Date(revealRequest.expiresAt).toLocaleString()}
                     </p>
+                  </div>
+
+                  {/* Testing Simulation Buttons */}
+                  <div className="space-y-3 mt-6">
+                    <p className="text-xs text-gray-500 mb-2">Testing Simulation:</p>
+                    <div className="flex space-x-2">
+                      <Button
+                        onClick={async () => {
+                          console.log('✅ Simulating provider consent...');
+                          // Update request status and reveal contact
+                          setRevealRequest(prev => prev ? {...prev, status: 'APPROVED'} : null);
+                          await checkRevealStatus();
+                        }}
+                        variant="primary"
+                        size="sm"
+                        className="flex-1"
+                      >
+                        ✅ Simulate Provider Consent
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          console.log('❌ Simulating provider rejection...');
+                          setRevealRequest(prev => prev ? {...prev, status: 'DENIED'} : null);
+                        }}
+                        variant="secondary"
+                        size="sm"
+                        className="flex-1"
+                      >
+                        ❌ Simulate Provider Rejection
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
