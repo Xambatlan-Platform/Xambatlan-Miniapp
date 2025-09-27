@@ -1,0 +1,46 @@
+{
+  "name": "api",
+  "version": "0.1.0",
+  "description": "Xambatlán API Backend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint src/**/*.ts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "tsx src/db/seed.ts",
+    "db:generate": "prisma generate",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@fastify/cors": "^9.0.0",
+    "@fastify/multipart": "^8.0.0",
+    "@fastify/swagger": "^8.12.0",
+    "@fastify/swagger-ui": "^2.0.0",
+    "@prisma/client": "^5.7.0",
+    "@xambitlan/types": "workspace:*",
+    "@xambitlan/shared": "workspace:*",
+    "fastify": "^4.24.0",
+    "prisma": "^5.7.0",
+    "zod": "^3.22.4",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "libsodium-wrappers": "^0.7.11",
+    "ipfs-http-client": "^60.0.0",
+    "viem": "2.23.5"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/libsodium-wrappers": "^0.7.13",
+    "@types/node": "^20",
+    "eslint": "^9",
+    "tsx": "^4.6.0",
+    "typescript": "^5",
+    "vitest": "^1.0.0"
+  }
+}

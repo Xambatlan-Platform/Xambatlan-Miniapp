@@ -1,0 +1,30 @@
+{
+  "name": "@xambitlan/shared",
+  "version": "0.1.0",
+  "description": "Shared utilities for Xambatlán",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@xambitlan/types": "workspace:*",
+    "zod": "^3.22.4",
+    "libsodium-wrappers": "^0.7.11"
+  },
+  "devDependencies": {
+    "@types/libsodium-wrappers": "^0.7.13",
+    "typescript": "^5"
+  }
+}

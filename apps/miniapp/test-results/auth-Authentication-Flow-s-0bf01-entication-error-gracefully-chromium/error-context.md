@@ -1,0 +1,80 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e7] [cursor=pointer]:
+    - img [ref=e8] [cursor=pointer]
+  - alert [ref=e11]
+  - main [ref=e12]:
+    - generic [ref=e13]:
+      - generic [ref=e14]:
+        - heading "🌟 Xambatlán" [level=1] [ref=e15]
+        - paragraph [ref=e16]: Trust-ranking Mini App for World App
+      - generic [ref=e17]:
+        - heading "🧪 Frontend Testing Mode" [level=2] [ref=e18]
+        - generic [ref=e19]:
+          - generic [ref=e22]: Mock API Running
+          - generic [ref=e25]: Next.js Mini App Ready
+          - generic [ref=e28]: "App ID: app_f9d136c94bb262ec8d183d844e8298cf"
+      - generic [ref=e29]:
+        - heading "🆔 World ID Authentication" [level=3] [ref=e30]
+        - paragraph [ref=e31]: Test the World ID verification flow with your app ID.
+        - generic [ref=e32]:
+          - paragraph [ref=e33]: 🚫 MiniKit not detected.
+          - paragraph [ref=e34]: If you're in World App, MiniKit might be loading...
+          - generic [ref=e35]:
+            - button "🔄 Retry Detection" [ref=e36] [cursor=pointer]
+            - button "⚠️ Force Enable (Testing)" [ref=e37] [cursor=pointer]
+      - generic [ref=e38]:
+        - heading "🚀 Coming Soon" [level=3] [ref=e39]
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - generic [ref=e42]:
+              - generic [ref=e43]: 👥
+              - generic [ref=e44]: Profile Management
+            - generic [ref=e45]: Mock Ready
+          - generic [ref=e46]:
+            - generic [ref=e47]:
+              - generic [ref=e48]: 🛍️
+              - generic [ref=e49]: Service Directory
+            - generic [ref=e50]: Mock Ready
+          - generic [ref=e51]:
+            - generic [ref=e52]:
+              - generic [ref=e53]: 🔒
+              - generic [ref=e54]: Pay-to-Reveal
+            - generic [ref=e55]: Mock Ready
+          - generic [ref=e56]:
+            - generic [ref=e57]:
+              - generic [ref=e58]: 💰
+              - generic [ref=e59]: Escrow Deals
+            - generic [ref=e60]: Mock Ready
+          - generic [ref=e61]:
+            - generic [ref=e62]:
+              - generic [ref=e63]: ⭐
+              - generic [ref=e64]: Reputation System
+            - generic [ref=e65]: Mock Ready
+      - generic [ref=e66]:
+        - heading "📱 Testing Instructions" [level=4] [ref=e67]
+        - list [ref=e68]:
+          - listitem [ref=e69]:
+            - text: "1."
+            - strong [ref=e70]: "QR Code:"
+            - text: Visit /test page for QR code to scan
+          - listitem [ref=e71]:
+            - text: "2."
+            - strong [ref=e72]: "Direct URL:"
+            - text: https://7dd17759b4f2.ngrok-free.app/
+          - listitem [ref=e73]:
+            - text: "3."
+            - strong [ref=e74]: "World App:"
+            - text: Use App ID app_f9d136c94bb262ec8d183d844e8298cf
+          - listitem [ref=e75]:
+            - text: "4."
+            - strong [ref=e76]: "Debug:"
+            - text: Check browser console for MiniKit info
+        - link "📱 Get QR Code" [ref=e78] [cursor=pointer]:
+          - /url: /test
+      - generic [ref=e79]:
+        - paragraph [ref=e80]: Built with Next.js 15 + MiniKit + World ID
+        - paragraph [ref=e81]: Frontend Testing Environment v1.0
+```

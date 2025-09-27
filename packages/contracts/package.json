@@ -1,0 +1,19 @@
+{
+  "name": "@xambitlan/contracts",
+  "version": "0.1.0",
+  "description": "Xambatlán Smart Contracts",
+  "private": true,
+  "scripts": {
+    "build": "forge build",
+    "test": "forge test",
+    "deploy": "forge script script/Deploy.s.sol --broadcast",
+    "deploy:local": "forge script script/Deploy.s.sol --broadcast --rpc-url http://localhost:8545",
+    "clean": "forge clean",
+    "lint": "forge fmt --check",
+    "typechain": "typechain --target=ethers-v6 --out-dir=typechain out/**/*.json"
+  },
+  "devDependencies": {
+    "typechain": "^8.3.0",
+    "@typechain/ethers-v6": "^0.5.0"
+  }
+}

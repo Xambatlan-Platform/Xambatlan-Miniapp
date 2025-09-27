@@ -1,0 +1,41 @@
+{
+  "name": "xambitlan",
+  "version": "0.1.0",
+  "description": "Xambatlán - Trust-ranking Mini App for World App",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm run --parallel dev",
+    "dev:miniapp": "pnpm --filter miniapp dev",
+    "dev:api": "pnpm --filter api dev",
+    "build": "pnpm run --recursive build",
+    "build:miniapp": "pnpm --filter miniapp build",
+    "build:api": "pnpm --filter api build",
+    "lint": "pnpm run --recursive lint",
+    "typecheck": "pnpm run --recursive typecheck",
+    "test": "pnpm run --recursive test",
+    "clean": "pnpm run --recursive clean",
+    "db:migrate": "pnpm --filter api db:migrate",
+    "db:seed": "pnpm --filter api db:seed",
+    "contracts:deploy": "pnpm --filter contracts deploy",
+    "contracts:test": "pnpm --filter contracts test",
+    "test:frontend": "./scripts/test-frontend.sh"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "prettier": "^3.1.0",
+    "turbo": "^1.11.0",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  }
+}

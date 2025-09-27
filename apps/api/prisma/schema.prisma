@@ -1,0 +1,270 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model - tied to World ID
+model User {
+  id            String   @id @default(cuid())
+  worldIdHash   String   @unique @map("world_id_hash") // Nullifier hash from World ID
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  profile       Profile?
+  services      Service[]
+  sentRevealRequests    RevealRequest[] @relation("ClientRevealRequests")
+  receivedRevealRequests RevealRequest[] @relation("ProviderRevealRequests")
+  clientDeals   Deal[]   @relation("ClientDeals")
+  providerDeals Deal[]   @relation("ProviderDeals")
+  givenReviews  Review[] @relation("ReviewsGiven")
+  receivedReviews Review[] @relation("ReviewsReceived")
+  badges        Badge[]
+  auditLogs     AuditLog[]
+
+  @@map("users")
+}
+
+// Profile model - provider or client profile
+model Profile {
+  id               String      @id @default(cuid())
+  userId           String      @unique @map("user_id")
+  type             ProfileType
+  username         String      @unique
+  avatarUrl        String?     @map("avatar_url")
+  avatarEmoji      String?     @map("avatar_emoji")
+  bio              String?
+  contactHash      String      @map("contact_hash") // Hash of encrypted contact data
+  contactCiphertext String     @map("contact_ciphertext") // Encrypted contact data
+  sbtTokenId       String?     @map("sbt_token_id") // Token ID from ProfileSBT contract
+  reputationScore  Float       @default(0) @map("reputation_score")
+  totalReviews     Int         @default(0) @map("total_reviews")
+  ipfsCid          String?     @map("ipfs_cid") // IPFS content ID for metadata
+  createdAt        DateTime    @default(now()) @map("created_at")
+  updatedAt        DateTime    @updatedAt @map("updated_at")
+
+  // Relations
+  user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("profiles")
+}
+
+enum ProfileType {
+  PROVIDER
+  CLIENT
+}
+
+// Service model - service offerings by providers
+model Service {
+  id            String            @id @default(cuid())
+  ownerId       String            @map("owner_id")
+  category      String
+  title         String
+  description   String
+  priceModel    PriceModel        @map("price_model")
+  price         Float?
+  currency      String            @default("USDC")
+  ipfsCid       String?           @map("ipfs_cid")
+  active        Boolean           @default(true)
+  createdAt     DateTime          @default(now()) @map("created_at")
+  updatedAt     DateTime          @updatedAt @map("updated_at")
+
+  // Relations
+  owner         User              @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  availability  AvailabilitySlot[]
+  revealRequests RevealRequest[]
+  deals         Deal[]
+
+  @@map("services")
+}
+
+enum PriceModel {
+  HOURLY
+  FIXED
+  NEGOTIABLE
+}
+
+// Availability slots for services
+model AvailabilitySlot {
+  id          String   @id @default(cuid())
+  serviceId   String   @map("service_id")
+  dayOfWeek   Int      @map("day_of_week") // 0 = Sunday, 6 = Saturday
+  startTime   String   @map("start_time") // HH:MM format
+  endTime     String   @map("end_time")   // HH:MM format
+  timezone    String   @default("UTC")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  // Relations
+  service     Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@map("availability_slots")
+}
+
+// Reveal request model - pay-to-reveal flow
+model RevealRequest {
+  id                String            @id @default(cuid())
+  serviceId         String            @map("service_id")
+  clientId          String            @map("client_id")
+  providerId        String            @map("provider_id")
+  status            RevealStatus      @default(PENDING)
+  paymentRef        String            @map("payment_ref") // Transaction hash or payment reference
+  paymentAmount     Float?            @map("payment_amount")
+  message           String?           // Optional message from client
+  consentSignature  String?           @map("consent_signature")
+  consentMessage    String?           @map("consent_message")
+  accessToken       String?           @map("access_token") // Time-boxed access token
+  expiresAt         DateTime          @map("expires_at")
+  createdAt         DateTime          @default(now()) @map("created_at")
+  updatedAt         DateTime          @updatedAt @map("updated_at")
+
+  // Relations
+  service           Service           @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  client            User              @relation("ClientRevealRequests", fields: [clientId], references: [id], onDelete: Cascade)
+  provider          User              @relation("ProviderRevealRequests", fields: [providerId], references: [id], onDelete: Cascade)
+
+  @@map("reveal_requests")
+}
+
+enum RevealStatus {
+  PENDING
+  APPROVED
+  DENIED
+  EXPIRED
+}
+
+// Deal model - on-chain and off-chain deals
+model Deal {
+  id            String      @id @default(cuid())
+  serviceId     String      @map("service_id")
+  clientId      String      @map("client_id")
+  providerId    String      @map("provider_id")
+  onChain       Boolean     @map("on_chain")
+  escrowTx      String?     @map("escrow_tx") // Transaction hash for escrow
+  amount        Float?
+  currency      String?     @default("USDC")
+  status        DealStatus  @default(PENDING)
+  agreementHash String?     @map("agreement_hash") // Hash of off-chain agreement
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+  completedAt   DateTime?   @map("completed_at")
+
+  // Relations
+  service       Service     @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  client        User        @relation("ClientDeals", fields: [clientId], references: [id], onDelete: Cascade)
+  provider      User        @relation("ProviderDeals", fields: [providerId], references: [id], onDelete: Cascade)
+  reviews       Review[]
+
+  @@map("deals")
+}
+
+enum DealStatus {
+  PENDING
+  ACTIVE
+  COMPLETED
+  CANCELLED
+  DISPUTED
+}
+
+// Review model - mutual reviews after deal completion
+model Review {
+  id              String   @id @default(cuid())
+  dealId          String   @map("deal_id")
+  fromUserId      String   @map("from_user_id")
+  toUserId        String   @map("to_user_id")
+  rating          Int      // 1-5 stars
+  text            String?
+  attestationRef  String?  @map("attestation_ref") // Reference to on-chain attestation
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  // Relations
+  deal            Deal     @relation(fields: [dealId], references: [id], onDelete: Cascade)
+  fromUser        User     @relation("ReviewsGiven", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUser          User     @relation("ReviewsReceived", fields: [toUserId], references: [id], onDelete: Cascade)
+
+  // Ensure one review per user per deal
+  @@unique([dealId, fromUserId])
+  @@map("reviews")
+}
+
+// Badge model - reputation badges
+model Badge {
+  id          String    @id @default(cuid())
+  userId      String    @map("user_id")
+  kind        BadgeType
+  title       String
+  description String
+  iconUrl     String?   @map("icon_url")
+  awardedAt   DateTime  @default(now()) @map("awarded_at")
+
+  // Relations
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("badges")
+}
+
+enum BadgeType {
+  VERIFIED_PROVIDER
+  TOP_RATED
+  QUICK_RESPONDER
+  RELIABLE
+  NEWCOMER
+  EARLY_ADOPTER
+  FREQUENT_CLIENT
+  TRUSTED_ESCROW
+}
+
+// Audit log for sensitive operations
+model AuditLog {
+  id          String      @id @default(cuid())
+  userId      String?     @map("user_id")
+  action      AuditAction
+  resourceType String     @map("resource_type")
+  resourceId  String      @map("resource_id")
+  details     Json?       // Additional context data
+  ipAddress   String?     @map("ip_address")
+  userAgent   String?     @map("user_agent")
+  createdAt   DateTime    @default(now()) @map("created_at")
+
+  // Relations
+  user        User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("audit_logs")
+}
+
+enum AuditAction {
+  USER_VERIFY
+  PROFILE_CREATE
+  PROFILE_UPDATE
+  SERVICE_CREATE
+  SERVICE_UPDATE
+  REVEAL_REQUEST
+  REVEAL_CONSENT
+  REVEAL_ACCESS
+  DEAL_CREATE
+  DEAL_UPDATE
+  DEAL_COMPLETE
+  REVIEW_CREATE
+  BADGE_AWARD
+}
+
+// Categories for services (could be expanded to a separate table later)
+model ServiceCategory {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  nameEs      String   @map("name_es") // Spanish translation
+  description String?
+  iconUrl     String?  @map("icon_url")
+  active      Boolean  @default(true)
+  sortOrder   Int      @default(0) @map("sort_order")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("service_categories")
+}

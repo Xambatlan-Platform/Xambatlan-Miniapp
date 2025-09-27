@@ -1,0 +1,53 @@
+{
+  "name": "miniapp",
+  "version": "0.1.0",
+  "description": "Xambatlán Mini App Frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf .next",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.3.0",
+    "@worldcoin/mini-apps-ui-kit-react": "^1.0.2",
+    "@worldcoin/minikit-js": "latest",
+    "@worldcoin/minikit-react": "latest",
+    "@xambitlan/types": "workspace:*",
+    "@xambitlan/ui": "workspace:*",
+    "clsx": "^2.1.1",
+    "date-fns": "^3.0.0",
+    "iconoir-react": "^7.11.0",
+    "next": "15.2.3",
+    "next-auth": "^5.0.0-beta.25",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.48.0",
+    "tailwind-merge": "^3.2.0",
+    "viem": "2.23.5",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.55.1",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eruda": "^3.4.1",
+    "eslint": "^9",
+    "eslint-config-next": "15.2.3",
+    "playwright": "^1.55.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
