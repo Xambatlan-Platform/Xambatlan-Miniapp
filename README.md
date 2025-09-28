@@ -1,22 +1,35 @@
-# Xambatlán 🌟
+# 🏛️ Xambatlán 🏛️
 
-**Trust-ranking Mini App for World App** - Enabling low-friction deals between service providers and clients through reputation scores, badges, and attestations.
+**El Gran Mercado Digital de Tenochtitlán** - Where ancestral trust meets modern technology. A World App Mini App featuring an Aztec-inspired trust-ranking marketplace for service providers and clients.
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-15.2.3-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.1.1-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
 [![Fastify](https://img.shields.io/badge/Fastify-000000?style=for-the-badge&logo=fastify&logoColor=white)](https://www.fastify.io/)
 [![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)](https://prisma.io/)
 [![World ID](https://img.shields.io/badge/World_ID-000000?style=for-the-badge&logo=worldcoin&logoColor=white)](https://world.org/)
+[![WCAG](https://img.shields.io/badge/WCAG-2.1_AA-green?style=for-the-badge)](https://www.w3.org/WAI/WCAG21/quickref/)
 
-## Overview
+## 🌟 Overview
 
-Xambatlán is a World App Mini App that creates a trust-ranking layer for service marketplaces. Built with World ID verification, it enables secure deals through:
+Xambatlán is a World App Mini App that creates a trust-ranking layer for service marketplaces, themed as a sacred digital temple marketplace of ancient Tenochtitlán. Built with World ID verification and featuring a complete Aztec-inspired UI redesign with accessibility-first design principles.
 
-- **🆔 World ID Authentication** - Sybil-resistant identity verification
-- **🔒 Pay-to-Reveal Contacts** - Privacy-preserving contact sharing with consent
+### ✨ Latest Features (January 2025)
+
+- **🏛️ Aztec Temple UI Redesign** - Complete visual overhaul with authentic pixel-art aesthetics
+- **♿ Accessibility-First Design** - WCAG 2.1 AA compliant, epilepsy-safe animations
+- **🎨 Custom Design System** - Jade, obsidian, gold, and quetzal color palette
+- **📱 Mobile-Optimized UX** - Touch-friendly interface for World App
+- **🔮 Ritual-Based Interactions** - Pay-to-reveal becomes "Ritual de Revelación"
+- **🛡️ Sacred Security** - Enhanced privacy with temple guardian metaphors
+
+### 🚀 Core Features
+
+- **🆔 World ID Authentication** - Sybil-resistant identity verification with sacred ritual theming
+- **🔒 Pay-to-Reveal Contacts** - Privacy-preserving contact sharing with consent ("Ritual de Revelación")
 - **💰 Escrow Deals** - On-chain and off-chain transaction protection
 - **⭐ Reputation System** - EWMA-based scoring with badges and attestations
-- **🛡️ Security First** - End-to-end encryption for PII data
+- **🛡️ Security First** - End-to-end encryption for PII data with temple guardian protection
 
 ## Quick Start
 
@@ -199,14 +212,25 @@ NEXT_PUBLIC_WORLD_ID_APP_ID="app_staging_xxx"
 4. Build trust score over time
 5. Attract more clients
 
-## Security Features
+## Security & Accessibility Features
 
+### 🔐 Security
 - **🔐 End-to-End PII Encryption** using libsodium
 - **🔑 Time-Boxed Access Controls** for sensitive data
 - **📝 Complete Audit Logging** for compliance
 - **🛡️ Rate Limiting** against abuse
 - **✅ Cryptographic Signatures** for consent
 - **🔒 Soulbound Tokens** preventing identity transfer
+
+### ♿ Accessibility (WCAG 2.1 AA Compliant)
+- **🚫 Epilepsy-Safe Design** - Zero dangerous flashing animations
+- **🔍 High Contrast Text** - Optimized readability for all users
+- **📱 Touch-Optimized** - Large touch targets for mobile users
+- **🎯 Focus Management** - Proper keyboard navigation support
+- **📖 Screen Reader Friendly** - Semantic HTML and ARIA labels
+- **⚡ Reduced Motion Support** - Respects user motion preferences
+- **🎨 Color Accessibility** - Sufficient contrast ratios throughout
+- **📏 Responsive Design** - Works on all screen sizes and orientations
 
 ## Deployment
 
@@ -267,12 +291,25 @@ pnpm test:contracts       # Smart contract tests
 
 ## Technology Stack
 
-- **Frontend**: Next.js 15, React 19, TypeScript, TailwindCSS
-- **Backend**: Fastify, Prisma, PostgreSQL, JWT
+### Frontend (Mini App)
+- **Framework**: Next.js 15.2.3, React 19.1.1, TypeScript 5.9.2
+- **UI System**: Custom Aztec-inspired design system with TailwindCSS
+- **World Integration**: MiniKit, World ID SDK, World App Mini Apps UI Kit
+- **Accessibility**: WCAG 2.1 AA compliant, epilepsy-safe animations
+- **Design**: Pixel-art aesthetics, jade/obsidian/gold color palette
+
+### Backend & Infrastructure
+- **API**: Fastify, Prisma, PostgreSQL, JWT
 - **Blockchain**: Foundry, Solidity, viem
-- **World ID**: MiniKit, World ID SDK
-- **Security**: libsodium, HMAC signatures
+- **Security**: libsodium, HMAC signatures, envelope encryption
 - **Infrastructure**: Railway, Vercel, IPFS
+
+### Design System Features
+- **Color Palette**: Jade, obsidian, gold, quetzal, coral themed colors
+- **Typography**: Custom pixel fonts with Aztec styling
+- **Components**: Temple-themed cards, sacred buttons, ritual layouts
+- **Accessibility**: High contrast text, no dangerous animations, touch-optimized
+- **Responsive**: Mobile-first design for World App integration
 
 ## License
 
