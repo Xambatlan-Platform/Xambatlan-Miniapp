@@ -383,7 +383,7 @@ export default function ServicesPage() {
                   <select
                     value={serviceForm.category}
                     onChange={(e) => setServiceForm(prev => ({ ...prev, category: e.target.value }))}
-                    className="w-full px-4 py-3 text-base border-2 border-jade-200 rounded-aztec focus:ring-2 focus:ring-jade-300 focus:border-jade-400 transition-colors touch-target bg-jade-50"
+                    className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target"
                   >
                     {categories.map((cat) => (
                       <option key={cat.slug} value={cat.slug}>
@@ -403,7 +403,7 @@ export default function ServicesPage() {
                     value={serviceForm.title}
                     onChange={(e) => setServiceForm(prev => ({ ...prev, title: e.target.value }))}
                     placeholder="ej. Reparaciones de Casa y Albañilería"
-                    className="w-full px-4 py-3 text-base border-2 border-jade-200 rounded-aztec focus:ring-2 focus:ring-jade-300 focus:border-jade-400 transition-colors touch-target bg-jade-50"
+                    className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500"
                   />
                 </div>
 
@@ -417,7 +417,7 @@ export default function ServicesPage() {
                     onChange={(e) => setServiceForm(prev => ({ ...prev, description: e.target.value }))}
                     placeholder="Describe tu servicio en detalle, experiencia y qué incluye"
                     rows={4}
-                    className="w-full px-4 py-3 text-base border-2 border-jade-200 rounded-aztec focus:ring-2 focus:ring-jade-300 focus:border-jade-400 transition-colors bg-jade-50 resize-none"
+                    className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors resize-none placeholder:text-stone-500"
                   />
                 </div>
 
@@ -458,7 +458,7 @@ export default function ServicesPage() {
                       value={serviceForm.price}
                       onChange={(e) => setServiceForm(prev => ({ ...prev, price: e.target.value }))}
                       placeholder="0.00"
-                      className="flex-1 px-4 py-3 text-lg font-mono border-2 border-jade-200 rounded-aztec focus:ring-2 focus:ring-jade-300 focus:border-jade-400 transition-colors touch-target bg-jade-50"
+                      className="flex-1 px-4 py-3 text-lg font-mono text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500"
                     />
                     <Badge variant="gold" size="md">
                       USDC {serviceForm.priceModel === 'HOURLY' ? '/hora' : 'total'}

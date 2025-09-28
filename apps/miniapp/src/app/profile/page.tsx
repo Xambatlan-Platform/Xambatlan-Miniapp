@@ -250,7 +250,7 @@ export default function ProfilePage() {
                     value={formData.username}
                     onChange={(e) => setFormData(prev => ({ ...prev, username: e.target.value }))}
                     placeholder="Tu nombre en Xambatlán"
-                    className="w-full px-4 py-3 text-lg border-2 border-jade-200 rounded-aztec focus:ring-2 focus:ring-jade-300 focus:border-jade-400 transition-colors touch-target bg-jade-50"
+                    className="w-full px-4 py-3 text-lg text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500"
                   />
                 </div>
 
@@ -267,7 +267,7 @@ export default function ProfilePage() {
                       : 'Cuéntanos sobre ti y qué tipo de servicios buscas'
                     }
                     rows={4}
-                    className="w-full px-4 py-3 text-base border-2 border-jade-200 rounded-aztec focus:ring-2 focus:ring-jade-300 focus:border-jade-400 transition-colors bg-jade-50 resize-none"
+                    className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors resize-none placeholder:text-stone-500"
                   />
                 </div>
 
@@ -286,7 +286,7 @@ export default function ProfilePage() {
                         contactInfo: { ...prev.contactInfo, whatsapp: e.target.value }
                       }))}
                       placeholder="Número de WhatsApp"
-                      className="w-full px-4 py-3 text-base border-2 border-jade-200 rounded-aztec focus:ring-2 focus:ring-jade-300 focus:border-jade-400 transition-colors touch-target bg-jade-50"
+                      className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500"
                     />
                     <input
                       type="email"
@@ -296,7 +296,7 @@ export default function ProfilePage() {
                         contactInfo: { ...prev.contactInfo, email: e.target.value }
                       }))}
                       placeholder="Correo electrónico"
-                      className="w-full px-4 py-3 text-base border-2 border-jade-200 rounded-aztec focus:ring-2 focus:ring-jade-300 focus:border-jade-400 transition-colors touch-target bg-jade-50"
+                      className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500"
                     />
                     <input
                       type="url"
@@ -306,7 +306,7 @@ export default function ProfilePage() {
                         contactInfo: { ...prev.contactInfo, website: e.target.value }
                       }))}
                       placeholder="Sitio web o redes sociales"
-                      className="w-full px-4 py-3 text-base border-2 border-jade-200 rounded-aztec focus:ring-2 focus:ring-jade-300 focus:border-jade-400 transition-colors touch-target bg-jade-50"
+                      className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500"
                     />
                   </div>
                   <div className="mt-2 p-3 bg-gold-50 border border-gold-200 rounded-aztec">
