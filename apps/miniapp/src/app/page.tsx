@@ -4,6 +4,24 @@ import { AuthButton } from '@/components/AuthButton';
 import { useUser } from '@/contexts/UserContext';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import {
+  Layout,
+  Section,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  Button,
+  StatusIndicator,
+  Badge,
+  UserIcon,
+  ToolsIcon,
+  LockIcon,
+  CoinIcon,
+  StarIcon,
+  ShieldIcon,
+} from '@/components/ui';
 
 export default function Home() {
   const { isAuthenticated, isLoading } = useUser();
@@ -17,142 +35,177 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-        <div className="max-w-md mx-auto pt-8">
+      <Layout variant="centered" showLogo={false}>
+        <Card variant="temple" padding="xl">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600">Loading...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-jade-300 border-t-jade-700 mx-auto mb-4"></div>
+            <p className="text-lg font-pixel text-jade-700 uppercase tracking-wide">
+              Cargando...
+            </p>
           </div>
-        </div>
-      </div>
+        </Card>
+      </Layout>
     );
   }
 
   if (isAuthenticated) {
     return null; // Will redirect to profile
   }
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <div className="max-w-md mx-auto pt-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            🌟 Xambatlán
-          </h1>
-          <p className="text-gray-600">
-            Trust-ranking Mini App for World App
-          </p>
-        </div>
-
-        {/* Status Card */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">
-            🧪 Frontend Testing Mode
-          </h2>
-          <div className="space-y-3">
-            <div className="flex items-center">
-              <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-              <span className="text-sm text-gray-600">Mock API Running</span>
+    <Layout
+      title="🏛️ XAMBATLÁN 🏛️"
+      subtitle="El Gran Mercado Digital de Tenochtitlán"
+      description="Donde la confianza ancestral encuentra la tecnología moderna"
+      variant="temple"
+      className="bg-temple-gradient min-h-screen"
+    >
+      {/* Sacred Temple Status - Digital Tenochtitlán */}
+      <Section className="mb-8">
+        <Card variant="tenochtitlan" padding="2xl" hoverable className="border-4 border-obsidian-900">
+          <CardHeader className="text-center">
+            <div className="flex justify-center mb-6">
+              <ShieldIcon size="4xl" variant="aztec" className="text-jade-700" />
             </div>
-            <div className="flex items-center">
-              <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-              <span className="text-sm text-gray-600">Next.js Mini App Ready</span>
-            </div>
-            <div className="flex items-center">
-              <div className="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
-              <span className="text-sm text-gray-600">
-                App ID: {process.env.NEXT_PUBLIC_WORLD_ID_APP_ID}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Authentication Section */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">
-            🆔 World ID Authentication
-          </h3>
-          <p className="text-sm text-gray-600 mb-4">
-            Test the World ID verification flow with your app ID.
-          </p>
-          <AuthButton />
-        </div>
-
-        {/* Features Preview */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">
-            🚀 Coming Soon
-          </h3>
-          <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <div className="flex items-center">
-                <span className="text-2xl mr-3">👥</span>
-                <span className="text-sm font-medium">Profile Management</span>
+            <CardTitle className="text-4xl font-aztec text-obsidian-900 uppercase tracking-widest mb-4">
+              🏮 TEMPLO SAGRADO 🏮
+            </CardTitle>
+            <CardDescription className="text-xl text-obsidian-700 font-bold">
+              La Gran Plaza Digital donde artesanos y clientes se encuentran bajo la protección divina
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {/* Temple Guardian Status */}
+            <div className="grid grid-cols-1 gap-6">
+              <div className="flex items-center justify-between p-4 bg-jade-100 border-4 border-obsidian-900 shadow-pixel-authentic">
+                <div className="flex items-center gap-4">
+                  <StatusIndicator status="verified" size="lg" />
+                  <span className="text-lg font-bold text-obsidian-900 font-pixel uppercase text-high-contrast">
+                    🛡️ Guardianes Activos
+                  </span>
+                </div>
+                <Badge variant="success" size="lg" className="font-pixel">PROTEGIDO</Badge>
               </div>
-              <span className="text-xs text-gray-500">Mock Ready</span>
-            </div>
 
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <div className="flex items-center">
-                <span className="text-2xl mr-3">🛍️</span>
-                <span className="text-sm font-medium">Service Directory</span>
+              <div className="flex items-center justify-between p-4 bg-quetzal-100 border-4 border-obsidian-900 shadow-pixel-authentic">
+                <div className="flex items-center gap-4">
+                  <StatusIndicator status="online" size="lg" />
+                  <span className="text-lg font-bold text-obsidian-900 font-pixel uppercase text-high-contrast">
+                    🌟 Mercado Abierto
+                  </span>
+                </div>
+                <Badge variant="info" size="lg" className="font-pixel">COMERCIANDO</Badge>
               </div>
-              <span className="text-xs text-gray-500">Mock Ready</span>
-            </div>
 
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <div className="flex items-center">
-                <span className="text-2xl mr-3">🔒</span>
-                <span className="text-sm font-medium">Pay-to-Reveal</span>
+              <div className="flex items-center justify-between p-4 bg-gold-100 border-4 border-obsidian-900 shadow-pixel-authentic">
+                <div className="flex items-center gap-4">
+                  <StatusIndicator status="verified" size="lg" />
+                  <span className="text-lg font-bold text-obsidian-900 font-pixel uppercase text-high-contrast">
+                    🏺 World ID Bendecido
+                  </span>
+                </div>
+                <Badge variant="warning" size="lg" className="font-pixel">SAGRADO</Badge>
               </div>
-              <span className="text-xs text-gray-500">Mock Ready</span>
             </div>
+          </CardContent>
+        </Card>
+      </Section>
 
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <div className="flex items-center">
-                <span className="text-2xl mr-3">💰</span>
-                <span className="text-sm font-medium">Escrow Deals</span>
+      {/* Sacred Authentication Altar */}
+      <Section>
+        <Card variant="obsidian" padding="2xl" hoverable className="border-4 border-obsidian-900 bg-gradient-to-b from-obsidian-100 to-jade-50">
+          <CardHeader className="text-center">
+            <div className="flex justify-center mb-6">
+              <UserIcon size="3xl" variant="aztec" className="text-jade-700" />
+            </div>
+            <CardTitle className="text-3xl font-aztec text-obsidian-900 uppercase tracking-widest mb-4">
+              🌅 RITUAL DE ENTRADA 🌅
+            </CardTitle>
+            <CardDescription className="text-lg text-obsidian-700 font-bold mb-6">
+              Presenta tu World ID ante los guardianes del templo para acceder al mercado sagrado
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-6">
+              <div className="w-full">
+                <AuthButton />
               </div>
-              <span className="text-xs text-gray-500">Mock Ready</span>
-            </div>
 
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <div className="flex items-center">
-                <span className="text-2xl mr-3">⭐</span>
-                <span className="text-sm font-medium">Reputation System</span>
+              <div className="text-center pt-6 border-t-4 border-obsidian-900 shadow-pixel-authentic">
+                <p className="text-base text-obsidian-900 font-bold text-high-contrast">
+                  🔮 Una vez verificado, tendrás acceso a todos los poderes del gran mercado
+                </p>
               </div>
-              <span className="text-xs text-gray-500">Mock Ready</span>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
+      </Section>
 
-        {/* Test Instructions */}
-        <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-          <h4 className="text-sm font-semibold text-blue-800 mb-2">
-            📱 Testing Instructions
-          </h4>
-          <ol className="text-xs text-blue-700 space-y-1">
-            <li>1. <strong>QR Code:</strong> Visit /test page for QR code to scan</li>
-            <li>2. <strong>Direct URL:</strong> https://7dd17759b4f2.ngrok-free.app/</li>
-            <li>3. <strong>World App:</strong> Use App ID {process.env.NEXT_PUBLIC_WORLD_ID_APP_ID}</li>
-            <li>4. <strong>Debug:</strong> Check browser console for MiniKit info</li>
-          </ol>
-          <div className="mt-3">
-            <a
-              href="/test"
-              className="inline-block px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700"
-            >
-              📱 Get QR Code
-            </a>
-          </div>
-        </div>
+      {/* Temple Features - Sacred Powers */}
+      <Section>
+        <Card variant="temple" padding="xl" hoverable className="border-4 border-obsidian-900">
+          <CardHeader>
+            <CardTitle className="text-2xl font-aztec text-obsidian-900 uppercase tracking-widest text-center mb-6">
+              🏛️ PODERES DEL TEMPLO 🏛️
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Artisan Power */}
+              <div className="p-6 bg-gradient-to-br from-jade-50 to-jade-100 border-4 border-obsidian-900 shadow-pixel-authentic pixel-art">
+                <div className="text-center mb-4">
+                  <ToolsIcon size="2xl" variant="aztec" className="text-jade-700 mx-auto mb-3 pixel-art" />
+                  <h3 className="text-xl font-pixel font-bold text-obsidian-900 uppercase text-high-contrast">
+                    🔨 ARTESANOS MAESTROS
+                  </h3>
+                </div>
+                <p className="text-base text-obsidian-900 text-center font-semibold text-high-contrast">
+                  Ofrece tus habilidades sagradas al pueblo con precios justos y transparentes
+                </p>
+              </div>
 
-        {/* Footer */}
-        <div className="text-center mt-8 text-xs text-gray-500">
-          <p>Built with Next.js 15 + MiniKit + World ID</p>
-          <p>Frontend Testing Environment v1.0</p>
-        </div>
-      </div>
-    </main>
+              {/* Payment Power */}
+              <div className="p-6 bg-gradient-to-br from-gold-50 to-gold-100 border-4 border-obsidian-900 shadow-pixel-authentic pixel-art">
+                <div className="text-center mb-4">
+                  <CoinIcon size="2xl" variant="aztec" className="text-gold-600 mx-auto mb-3 pixel-art" />
+                  <h3 className="text-xl font-pixel font-bold text-obsidian-900 uppercase text-high-contrast">
+                    💰 PAGOS SAGRADOS
+                  </h3>
+                </div>
+                <p className="text-base text-obsidian-900 text-center font-semibold text-high-contrast">
+                  Intercambia valor con la bendición de los dioses usando monedas digitales
+                </p>
+              </div>
+
+              {/* Trust Power */}
+              <div className="p-6 bg-gradient-to-br from-quetzal-50 to-quetzal-100 border-4 border-obsidian-900 shadow-pixel-authentic pixel-art">
+                <div className="text-center mb-4">
+                  <StarIcon size="2xl" variant="aztec" className="text-quetzal-600 mx-auto mb-3 pixel-art" filled />
+                  <h3 className="text-xl font-pixel font-bold text-obsidian-900 uppercase text-high-contrast">
+                    ⭐ REPUTACIÓN ETERNA
+                  </h3>
+                </div>
+                <p className="text-base text-obsidian-900 text-center font-semibold text-high-contrast">
+                  Construye tu legado con reseñas inmutables grabadas en la piedra digital
+                </p>
+              </div>
+
+              {/* Protection Power */}
+              <div className="p-6 bg-gradient-to-br from-coral-50 to-coral-100 border-4 border-obsidian-900 shadow-pixel-authentic pixel-art">
+                <div className="text-center mb-4">
+                  <LockIcon size="2xl" variant="aztec" className="text-coral-600 mx-auto mb-3 pixel-art" />
+                  <h3 className="text-xl font-pixel font-bold text-obsidian-900 uppercase text-high-contrast">
+                    🛡️ PROTECCIÓN DIVINA
+                  </h3>
+                </div>
+                <p className="text-base text-obsidian-900 text-center font-semibold text-high-contrast">
+                  Tus secretos permanecen seguros bajo el amparo de la criptografía ancestral
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </Section>
+    </Layout>
   );
 }

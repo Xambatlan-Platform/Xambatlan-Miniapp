@@ -164,8 +164,8 @@ export const HealthCheckSchema = z.object({
   timestamp: z.string().datetime(),
   services: z.record(z.object({
     status: HealthStatusSchema,
-    latency?: z.number(),
-    message?: z.string(),
+    latency: z.number().optional(),
+    message: z.string().optional(),
   })),
 });
 

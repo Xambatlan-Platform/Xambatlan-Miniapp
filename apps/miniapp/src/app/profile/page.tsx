@@ -1,9 +1,30 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Button } from '@worldcoin/mini-apps-ui-kit-react';
 import { useUser } from '@/contexts/UserContext';
 import { useRouter } from 'next/navigation';
+import {
+  Layout,
+  Section,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+  Button,
+  Badge,
+  ProgressBar,
+  Grid,
+  UserIcon,
+  ArtisanIcon,
+  StarIcon,
+  BadgeIcon,
+  ToolsIcon,
+  LockIcon,
+  CoinIcon,
+  ArrowRightIcon,
+} from '@/components/ui';
 
 export default function ProfilePage() {
   const { user, profile, isAuthenticated, isLoading, setProfile, logout } = useUser();
@@ -112,14 +133,16 @@ export default function ProfilePage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 p-4">
-        <div className="max-w-md mx-auto pt-8">
+      <Layout variant="centered" showLogo={false}>
+        <Card variant="temple" padding="xl">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600">Loading...</p>
+            <div className="rounded-full h-12 w-12 border-4 border-jade-300 border-t-jade-700 mx-auto mb-4"></div>
+            <p className="text-lg font-pixel text-jade-700 uppercase tracking-wide">
+              Cargando Perfil...
+            </p>
           </div>
-        </div>
-      </div>
+        </Card>
+      </Layout>
     );
   }
 
@@ -128,271 +151,344 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 p-4">
-      <div className="max-w-md mx-auto pt-4">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">
-            Xambatlán
-          </h1>
-          <Button
-            onClick={logout}
-            size="sm"
-            variant="secondary"
-          >
-            Sign Out
-          </Button>
-        </div>
+    <Layout
+      title={profile ? `Perfil de ${profile.username}` : 'Crear Perfil'}
+      subtitle={profile ? 'Tu espacio en el mercado de confianza' : 'Únete a la comunidad verificada'}
+      variant="marketplace"
+    >
+      {/* Header with logout */}
+      <div className="flex items-center justify-between mb-6">
+        <Button
+          onClick={logout}
+          size="sm"
+          variant="ghost"
+          leftIcon={<ArrowRightIcon size="sm" className="rotate-180" />}
+        >
+          Salir
+        </Button>
+      </div>
 
-        {!profile || showCreateProfile ? (
-          /* Profile Creation Form */
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
-              {profile ? 'Edit Profile' : 'Create Your Profile'}
-            </h2>
+      {!profile || showCreateProfile ? (
+        /* Profile Creation Form */
+        <Section>
+          <Card variant="temple" padding="lg">
+            <CardHeader withBorder>
+              <CardTitle aztec>
+                <UserIcon size="lg" className="text-jade-700" />
+                {profile ? 'Editar Perfil' : 'Crear tu Perfil'}
+              </CardTitle>
+              <CardDescription>
+                {profile
+                  ? 'Actualiza tu información en el mercado de confianza'
+                  : 'Completa tu perfil para comenzar a construir tu reputación'
+                }
+              </CardDescription>
+            </CardHeader>
 
-            <div className="space-y-4">
-              {/* Profile Type */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  I am a:
-                </label>
-                <div className="flex space-x-3">
-                  <button
-                    onClick={() => setFormData(prev => ({ ...prev, type: 'PROVIDER' }))}
-                    className={`flex-1 px-4 py-3 rounded-lg border ${
-                      formData.type === 'PROVIDER'
-                        ? 'bg-purple-100 border-purple-500 text-purple-700'
-                        : 'bg-gray-50 border-gray-200 text-gray-600'
-                    }`}
-                  >
-                    🔨 Service Provider
-                  </button>
-                  <button
-                    onClick={() => setFormData(prev => ({ ...prev, type: 'CLIENT' }))}
-                    className={`flex-1 px-4 py-3 rounded-lg border ${
-                      formData.type === 'CLIENT'
-                        ? 'bg-purple-100 border-purple-500 text-purple-700'
-                        : 'bg-gray-50 border-gray-200 text-gray-600'
-                    }`}
-                  >
-                    🏠 Client
-                  </button>
-                </div>
-              </div>
-
-              {/* Avatar Emoji */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Choose Avatar
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {emojiOptions.map((emoji) => (
+            <CardContent>
+              <div className="space-y-6">
+                {/* Profile Type */}
+                <div>
+                  <label className="block text-base font-pixel font-medium text-obsidian-900 text-high-contrast mb-3 uppercase tracking-wide">
+                    Soy:
+                  </label>
+                  <Grid cols={2} gap="sm">
                     <button
-                      key={emoji}
-                      onClick={() => setFormData(prev => ({ ...prev, avatarEmoji: emoji }))}
-                      className={`w-12 h-12 text-2xl rounded-lg border ${
-                        formData.avatarEmoji === emoji
-                          ? 'bg-purple-100 border-purple-500'
-                          : 'bg-gray-50 border-gray-200'
+                      onClick={() => setFormData(prev => ({ ...prev, type: 'PROVIDER' }))}
+                      className={`flex flex-col items-center gap-2 p-4 border-4 shadow-pixel-authentic pixel-art transition-all touch-target ${
+                        formData.type === 'PROVIDER'
+                          ? 'bg-jade-100 border-obsidian-900 text-obsidian-900 text-high-contrast shadow-pixel'
+                          : 'bg-jade-50 border-obsidian-900 text-obsidian-900 hover:bg-jade-100'
                       }`}
                     >
-                      {emoji}
+                      <ArtisanIcon size="xl" />
+                      <span className="font-pixel text-sm uppercase">Proveedor</span>
                     </button>
+                    <button
+                      onClick={() => setFormData(prev => ({ ...prev, type: 'CLIENT' }))}
+                      className={`flex flex-col items-center gap-2 p-4 border-4 shadow-pixel-authentic pixel-art transition-all touch-target ${
+                        formData.type === 'CLIENT'
+                          ? 'bg-teal-100 border-obsidian-900 text-obsidian-900 text-high-contrast shadow-pixel'
+                          : 'bg-teal-50 border-obsidian-900 text-obsidian-900 hover:bg-teal-100'
+                      }`}
+                    >
+                      <UserIcon size="xl" />
+                      <span className="font-pixel text-sm uppercase">Cliente</span>
+                    </button>
+                  </Grid>
+                </div>
+
+                {/* Avatar Emoji */}
+                <div>
+                  <label className="block text-base font-pixel font-medium text-obsidian-900 text-high-contrast mb-3 uppercase tracking-wide">
+                    Elige tu Avatar
+                  </label>
+                  <div className="grid grid-cols-6 gap-2">
+                    {emojiOptions.map((emoji) => (
+                      <button
+                        key={emoji}
+                        onClick={() => setFormData(prev => ({ ...prev, avatarEmoji: emoji }))}
+                        className={`aspect-square text-2xl border-4 shadow-pixel-authentic pixel-art transition-all touch-target ${
+                          formData.avatarEmoji === emoji
+                            ? 'bg-gold-100 border-obsidian-900 shadow-pixel'
+                            : 'bg-jade-50 border-obsidian-900 hover:bg-jade-100'
+                        }`}
+                      >
+                        {emoji}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Username */}
+                <div>
+                  <label className="block text-base font-pixel font-medium text-obsidian-900 text-high-contrast mb-3 uppercase tracking-wide">
+                    Nombre de Usuario
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.username}
+                    onChange={(e) => setFormData(prev => ({ ...prev, username: e.target.value }))}
+                    placeholder="Tu nombre en Xambatlán"
+                    className="w-full px-4 py-3 text-lg text-obsidian-900 bg-white border-4 border-obsidian-900 pixel-art focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500 text-high-contrast"
+                  />
+                </div>
+
+                {/* Bio */}
+                <div>
+                  <label className="block text-base font-pixel font-medium text-obsidian-900 text-high-contrast mb-3 uppercase tracking-wide">
+                    Descripción
+                  </label>
+                  <textarea
+                    value={formData.bio}
+                    onChange={(e) => setFormData(prev => ({ ...prev, bio: e.target.value }))}
+                    placeholder={formData.type === 'PROVIDER'
+                      ? 'Describe tus servicios, experiencia y especialidades'
+                      : 'Cuéntanos sobre ti y qué tipo de servicios buscas'
+                    }
+                    rows={4}
+                    className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-4 border-obsidian-900 pixel-art focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors resize-none placeholder:text-stone-500 text-high-contrast"
+                  />
+                </div>
+
+                {/* Contact Information */}
+                <div>
+                  <label className="block text-base font-pixel font-medium text-obsidian-900 text-high-contrast mb-3 uppercase tracking-wide">
+                    <LockIcon size="sm" className="inline mr-2" />
+                    Información de Contacto (Encriptada)
+                  </label>
+                  <div className="space-y-3">
+                    <input
+                      type="tel"
+                      value={formData.contactInfo.whatsapp}
+                      onChange={(e) => setFormData(prev => ({
+                        ...prev,
+                        contactInfo: { ...prev.contactInfo, whatsapp: e.target.value }
+                      }))}
+                      placeholder="Número de WhatsApp"
+                      className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-4 border-obsidian-900 pixel-art focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500 text-high-contrast"
+                    />
+                    <input
+                      type="email"
+                      value={formData.contactInfo.email}
+                      onChange={(e) => setFormData(prev => ({
+                        ...prev,
+                        contactInfo: { ...prev.contactInfo, email: e.target.value }
+                      }))}
+                      placeholder="Correo electrónico"
+                      className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-4 border-obsidian-900 pixel-art focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500 text-high-contrast"
+                    />
+                    <input
+                      type="url"
+                      value={formData.contactInfo.website}
+                      onChange={(e) => setFormData(prev => ({
+                        ...prev,
+                        contactInfo: { ...prev.contactInfo, website: e.target.value }
+                      }))}
+                      placeholder="Sitio web o redes sociales"
+                      className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-4 border-obsidian-900 pixel-art focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500 text-high-contrast"
+                    />
+                  </div>
+                  <div className="mt-2 p-3 bg-gold-50 border border-gold-200 rounded-aztec">
+                    <p className="text-sm text-gold-800 font-medium">
+                      🔐 Tu información se encripta y solo se revela cuando un cliente paga y tú das consentimiento
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+
+            <CardFooter>
+              <div className="flex gap-3 w-full">
+                {profile && (
+                  <Button
+                    onClick={() => setShowCreateProfile(false)}
+                    variant="secondary"
+                    size="lg"
+                    className="flex-1"
+                  >
+                    Cancelar
+                  </Button>
+                )}
+                <Button
+                  onClick={handleCreateProfile}
+                  disabled={isSubmitting || !formData.username || !formData.bio}
+                  variant="primary"
+                  size="lg"
+                  className="flex-1"
+                  isLoading={isSubmitting}
+                >
+                  {profile ? 'Actualizar Perfil' : 'Crear Perfil'}
+                </Button>
+              </div>
+            </CardFooter>
+          </Card>
+        </Section>
+      ) : (
+        /* Profile Display */
+        <div className="space-y-6">
+          {/* Profile Header Card */}
+          <Card variant="profile" padding="lg">
+            <div className="flex items-start gap-4 mb-6">
+              <div className="text-6xl">{profile.avatarEmoji}</div>
+              <div className="flex-1">
+                <h2 className="text-2xl font-pixel font-bold text-obsidian-900 uppercase tracking-wide mb-1">
+                  {profile.username}
+                </h2>
+                <div className="flex items-center gap-2 mb-2">
+                  {profile.type === 'PROVIDER' ? (
+                    <ArtisanIcon size="md" className="text-jade-600" />
+                  ) : (
+                    <UserIcon size="md" className="text-teal-600" />
+                  )}
+                  <span className="text-base font-medium text-obsidian-700">
+                    {profile.type === 'PROVIDER' ? 'Proveedor de Servicios' : 'Cliente'}
+                  </span>
+                </div>
+                <Badge variant="gold" size="md">
+                  <BadgeIcon size="xs" className="mr-1" />
+                  Verificado
+                </Badge>
+              </div>
+              <Button
+                onClick={() => {
+                  setFormData({
+                    type: profile.type,
+                    username: profile.username,
+                    bio: profile.bio,
+                    avatarEmoji: profile.avatarEmoji,
+                    contactInfo: {
+                      whatsapp: '',
+                      email: '',
+                      website: ''
+                    }
+                  });
+                  setShowCreateProfile(true);
+                }}
+                size="md"
+                variant="outline"
+              >
+                Editar
+              </Button>
+            </div>
+
+            <p className="text-base text-obsidian-700 mb-6 leading-relaxed">{profile.bio}</p>
+
+            {/* Reputation Section */}
+            <Card variant="temple" padding="md">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-pixel text-lg font-semibold text-obsidian-900 text-high-contrast uppercase tracking-wide">
+                  Reputación
+                </h3>
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <StarIcon
+                      key={i}
+                      size="md"
+                      filled={i < Math.floor(profile.reputationScore)}
+                      className="text-gold-500"
+                    />
                   ))}
                 </div>
               </div>
 
-              {/* Username */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Username
-                </label>
-                <input
-                  type="text"
-                  value={formData.username}
-                  onChange={(e) => setFormData(prev => ({ ...prev, username: e.target.value }))}
-                  placeholder="Enter your username"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                />
-              </div>
-
-              {/* Bio */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Bio
-                </label>
-                <textarea
-                  value={formData.bio}
-                  onChange={(e) => setFormData(prev => ({ ...prev, bio: e.target.value }))}
-                  placeholder={formData.type === 'PROVIDER' ? 'Describe your services and experience' : 'Tell us about yourself'}
-                  rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                />
-              </div>
-
-              {/* Contact Information */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Contact Information (Encrypted)
-                </label>
-                <div className="space-y-2">
-                  <input
-                    type="tel"
-                    value={formData.contactInfo.whatsapp}
-                    onChange={(e) => setFormData(prev => ({
-                      ...prev,
-                      contactInfo: { ...prev.contactInfo, whatsapp: e.target.value }
-                    }))}
-                    placeholder="WhatsApp number"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  />
-                  <input
-                    type="email"
-                    value={formData.contactInfo.email}
-                    onChange={(e) => setFormData(prev => ({
-                      ...prev,
-                      contactInfo: { ...prev.contactInfo, email: e.target.value }
-                    }))}
-                    placeholder="Email address"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  />
-                  <input
-                    type="url"
-                    value={formData.contactInfo.website}
-                    onChange={(e) => setFormData(prev => ({
-                      ...prev,
-                      contactInfo: { ...prev.contactInfo, website: e.target.value }
-                    }))}
-                    placeholder="Website or social media"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  />
-                </div>
-                <p className="text-xs text-gray-500 mt-1">
-                  Contact info is encrypted and only revealed when clients pay and you consent
-                </p>
-              </div>
-            </div>
-
-            {/* Actions */}
-            <div className="flex space-x-3 mt-6">
-              {profile && (
-                <Button
-                  onClick={() => setShowCreateProfile(false)}
-                  variant="secondary"
-                  size="lg"
-                  className="flex-1"
-                >
-                  Cancel
-                </Button>
-              )}
-              <Button
-                onClick={handleCreateProfile}
-                disabled={isSubmitting || !formData.username || !formData.bio}
-                variant="primary"
-                size="lg"
-                className="flex-1"
-              >
-                {isSubmitting ? 'Creating...' : (profile ? 'Update Profile' : 'Create Profile')}
-              </Button>
-            </div>
-          </div>
-        ) : (
-          /* Profile Display */
-          <div className="space-y-6">
-            {/* Profile Card */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="text-4xl">{profile.avatarEmoji}</div>
-                <div className="flex-1">
-                  <h2 className="text-xl font-bold text-gray-800">{profile.username}</h2>
-                  <p className="text-sm text-purple-600 font-medium">
-                    {profile.type === 'PROVIDER' ? '🔨 Service Provider' : '🏠 Client'}
-                  </p>
-                </div>
-                <Button
-                  onClick={() => {
-                    setFormData({
-                      type: profile.type,
-                      username: profile.username,
-                      bio: profile.bio,
-                      avatarEmoji: profile.avatarEmoji,
-                      contactInfo: {
-                        whatsapp: '',
-                        email: '',
-                        website: ''
-                      }
-                    });
-                    setShowCreateProfile(true);
-                  }}
-                  size="sm"
-                  variant="secondary"
-                >
-                  Edit
-                </Button>
-              </div>
-
-              <p className="text-gray-700 mb-4">{profile.bio}</p>
-
-              {/* Reputation */}
-              <div className="flex items-center space-x-4 p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
+              <Grid cols={3} gap="md">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-600">
+                  <div className="text-2xl font-pixel font-bold text-jade-700">
                     {profile.reputationScore.toFixed(1)}
                   </div>
-                  <div className="text-xs text-gray-600">Rating</div>
+                  <div className="text-sm text-stone-600 font-medium">Calificación</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-600">
+                  <div className="text-2xl font-pixel font-bold text-jade-700">
                     {profile.totalReviews}
                   </div>
-                  <div className="text-xs text-gray-600">Reviews</div>
+                  <div className="text-sm text-stone-600 font-medium">Reseñas</div>
                 </div>
-                <div className="flex-1">
-                  <div className="flex space-x-1">
-                    {profile.badges.map((badge, index) => (
-                      <span key={index} title={badge.title} className="text-lg">
-                        {badge.iconUrl}
-                      </span>
-                    ))}
+                <div className="text-center">
+                  <div className="text-2xl font-pixel font-bold text-jade-700">
+                    {profile.badges.length}
                   </div>
+                  <div className="text-sm text-stone-600 font-medium">Insignias</div>
+                </div>
+              </Grid>
+
+              <div className="mt-4">
+                <ProgressBar
+                  value={profile.reputationScore * 20}
+                  variant="reputation"
+                  className="mb-2"
+                />
+                <div className="flex justify-center gap-2">
+                  {profile.badges.map((badge, index) => (
+                    <span key={index} title={badge.title} className="text-2xl">
+                      {badge.iconUrl}
+                    </span>
+                  ))}
                 </div>
               </div>
-            </div>
+            </Card>
+          </Card>
 
-            {/* Navigation */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h3>
-              <div className="space-y-3">
-                <Button
-                  onClick={() => router.push('/services')}
-                  variant="primary"
-                  size="lg"
-                  className="w-full"
-                >
-                  {profile.type === 'PROVIDER' ? '🛠️ Manage My Services' : '🔍 Browse Services'}
-                </Button>
-                <Button
-                  onClick={() => router.push('/deals')}
-                  variant="secondary"
-                  size="lg"
-                  className="w-full"
-                >
-                  📋 My Deals
-                </Button>
-                <Button
-                  onClick={() => router.push('/reviews')}
-                  variant="secondary"
-                  size="lg"
-                  className="w-full"
-                >
-                  ⭐ Reviews
-                </Button>
-              </div>
+          {/* Quick Actions */}
+          <Section title="Acciones Rápidas">
+            <div className="space-y-4">
+              <Button
+                onClick={() => router.push('/services')}
+                variant="primary"
+                size="lg"
+                className="w-full"
+                leftIcon={profile.type === 'PROVIDER' ? <ToolsIcon size="lg" /> : <ToolsIcon size="lg" />}
+                rightIcon={<ArrowRightIcon size="md" />}
+              >
+                {profile.type === 'PROVIDER' ? 'Gestionar mis Servicios' : 'Explorar Servicios'}
+              </Button>
+
+              <Button
+                onClick={() => router.push('/deals')}
+                variant="secondary"
+                size="lg"
+                className="w-full"
+                leftIcon={<CoinIcon size="lg" />}
+                rightIcon={<ArrowRightIcon size="md" />}
+              >
+                Mis Contratos
+              </Button>
+
+              <Button
+                onClick={() => router.push('/reviews')}
+                variant="secondary"
+                size="lg"
+                className="w-full"
+                leftIcon={<StarIcon size="lg" />}
+                rightIcon={<ArrowRightIcon size="md" />}
+              >
+                Reseñas y Calificaciones
+              </Button>
             </div>
-          </div>
-        )}
-      </div>
-    </div>
+          </Section>
+        </div>
+      )}
+    </Layout>
   );
 }

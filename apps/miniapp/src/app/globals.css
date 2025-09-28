@@ -1,26 +1,108 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Jade-pastel Aztec/Maya theme colors */
+  --background: #f0fdf4;
+  --foreground: #292524;
+  --primary: #7EC9A3;
+  --primary-dark: #15803d;
+  --secondary: #78716c;
+  --accent-gold: #f59e0b;
+  --accent-coral: #ef4444;
+  --accent-teal: #0d9488;
+  --obsidian: #0f172a;
+
+  /* Typography */
+  --font-pixel: 'Orbitron', monospace;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Shadows and effects */
+  --shadow-pixel: 2px 2px 0px rgba(0, 0, 0, 0.2);
+  --shadow-temple: 0 8px 16px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-pixel: var(--font-pixel);
 }
 
+/* Dark mode adjustments for better contrast */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f172a;
+    --foreground: #f0fdf4;
+    --primary: #7EC9A3;
+    --primary-dark: #22c55e;
   }
 }
 
+/* Base styles */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Pixel art styling for decorative elements */
+.pixel-art {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* Aztec-inspired patterns */
+.aztec-border {
+  border-image: linear-gradient(45deg, #7EC9A3, #0d9488, #f59e0b) 1;
+  border-width: 2px;
+  border-style: solid;
+}
+
+/* High contrast text for accessibility */
+.text-high-contrast {
+  color: var(--obsidian);
+  font-weight: 500;
+}
+
+/* Touch-friendly interactive elements */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Smooth transitions for better UX */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
 }
