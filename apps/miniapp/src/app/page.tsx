@@ -4,6 +4,24 @@ import { AuthButton } from '@/components/AuthButton';
 import { useUser } from '@/contexts/UserContext';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import {
+  Layout,
+  Section,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  Button,
+  StatusIndicator,
+  Badge,
+  UserIcon,
+  ToolsIcon,
+  LockIcon,
+  CoinIcon,
+  StarIcon,
+  ShieldIcon,
+} from '@/components/ui';
 
 export default function Home() {
   const { isAuthenticated, isLoading } = useUser();
@@ -17,142 +35,230 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-        <div className="max-w-md mx-auto pt-8">
+      <Layout variant="centered" showLogo={false}>
+        <Card variant="temple" padding="xl">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600">Loading...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-jade-300 border-t-jade-700 mx-auto mb-4"></div>
+            <p className="text-lg font-pixel text-jade-700 uppercase tracking-wide">
+              Cargando...
+            </p>
           </div>
-        </div>
-      </div>
+        </Card>
+      </Layout>
     );
   }
 
   if (isAuthenticated) {
     return null; // Will redirect to profile
   }
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <div className="max-w-md mx-auto pt-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            🌟 Xambatlán
-          </h1>
-          <p className="text-gray-600">
-            Trust-ranking Mini App for World App
-          </p>
-        </div>
+    <Layout
+      title="Mercado de Confianza"
+      subtitle="La red de artesanos y profesionales verificados"
+      variant="marketplace"
+    >
+      {/* Status Card */}
+      <Section>
+        <Card variant="temple" padding="lg">
+          <CardHeader>
+            <CardTitle aztec>
+              <ShieldIcon size="lg" className="text-jade-700" />
+              Sistema Activo
+            </CardTitle>
+            <CardDescription>
+              Plataforma verificada con World ID y tecnología blockchain
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <StatusIndicator status="verified" />
+                  <span className="text-base font-medium text-obsidian-800">
+                    API Conectada
+                  </span>
+                </div>
+                <Badge variant="success">Activo</Badge>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <StatusIndicator status="online" />
+                  <span className="text-base font-medium text-obsidian-800">
+                    Mini App Lista
+                  </span>
+                </div>
+                <Badge variant="success">Funcionando</Badge>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <StatusIndicator status="verified" />
+                  <span className="text-base font-medium text-obsidian-800">
+                    World ID Verificado
+                  </span>
+                </div>
+                <Badge variant="default">
+                  {process.env.NEXT_PUBLIC_WORLD_ID_APP_ID?.slice(0, 8)}...
+                </Badge>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </Section>
 
-        {/* Status Card */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">
-            🧪 Frontend Testing Mode
-          </h2>
-          <div className="space-y-3">
-            <div className="flex items-center">
-              <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-              <span className="text-sm text-gray-600">Mock API Running</span>
+      {/* Authentication Section */}
+      <Section>
+        <Card variant="profile" padding="lg">
+          <CardHeader>
+            <CardTitle aztec>
+              <UserIcon size="lg" className="text-jade-700" />
+              Ingresa a Xambatlán
+            </CardTitle>
+            <CardDescription>
+              Verifica tu identidad humana con World ID para acceder al mercado de confianza
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <AuthButton />
+              <p className="text-sm text-stone-600 text-center">
+                Autenticación segura • Sin contraseñas • Identidad verificada
+              </p>
             </div>
-            <div className="flex items-center">
-              <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-              <span className="text-sm text-gray-600">Next.js Mini App Ready</span>
+          </CardContent>
+        </Card>
+      </Section>
+
+      {/* Features Preview */}
+      <Section title="Funciones Principales">
+        <div className="space-y-4">
+          <Card variant="marketplace" padding="md" hoverable>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-jade-100 rounded-pyramid">
+                  <UserIcon size="lg" className="text-jade-700" />
+                </div>
+                <div>
+                  <h4 className="font-pixel text-base font-semibold text-obsidian-800 uppercase">
+                    Perfiles Verificados
+                  </h4>
+                  <p className="text-sm text-stone-600">
+                    Crea tu reputación con World ID
+                  </p>
+                </div>
+              </div>
+              <Badge variant="gold">Disponible</Badge>
             </div>
-            <div className="flex items-center">
-              <div className="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
-              <span className="text-sm text-gray-600">
-                App ID: {process.env.NEXT_PUBLIC_WORLD_ID_APP_ID}
-              </span>
+          </Card>
+
+          <Card variant="marketplace" padding="md" hoverable>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-teal-100 rounded-pyramid">
+                  <ToolsIcon size="lg" className="text-teal-600" />
+                </div>
+                <div>
+                  <h4 className="font-pixel text-base font-semibold text-obsidian-800 uppercase">
+                    Directorio de Servicios
+                  </h4>
+                  <p className="text-sm text-stone-600">
+                    Encuentra artesanos y profesionales
+                  </p>
+                </div>
+              </div>
+              <Badge variant="gold">Disponible</Badge>
             </div>
+          </Card>
+
+          <Card variant="marketplace" padding="md" hoverable>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-gold-100 rounded-pyramid">
+                  <LockIcon size="lg" className="text-gold-600" />
+                </div>
+                <div>
+                  <h4 className="font-pixel text-base font-semibold text-obsidian-800 uppercase">
+                    Pago por Contacto
+                  </h4>
+                  <p className="text-sm text-stone-600">
+                    Accede a info de contacto con consentimiento
+                  </p>
+                </div>
+              </div>
+              <Badge variant="gold">Disponible</Badge>
+            </div>
+          </Card>
+
+          <Card variant="marketplace" padding="md" hoverable>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-coral-100 rounded-pyramid">
+                  <CoinIcon size="lg" className="text-coral-600" />
+                </div>
+                <div>
+                  <h4 className="font-pixel text-base font-semibold text-obsidian-800 uppercase">
+                    Contratos Seguros
+                  </h4>
+                  <p className="text-sm text-stone-600">
+                    Escrow con pagos en crypto
+                  </p>
+                </div>
+              </div>
+              <Badge variant="gold">Disponible</Badge>
+            </div>
+          </Card>
+
+          <Card variant="marketplace" padding="md" hoverable>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-jade-100 rounded-pyramid">
+                  <StarIcon size="lg" className="text-jade-700" filled />
+                </div>
+                <div>
+                  <h4 className="font-pixel text-base font-semibold text-obsidian-800 uppercase">
+                    Sistema de Reputación
+                  </h4>
+                  <p className="text-sm text-stone-600">
+                    Calificaciones y badges on-chain
+                  </p>
+                </div>
+              </div>
+              <Badge variant="gold">Disponible</Badge>
+            </div>
+          </Card>
+        </div>
+      </Section>
+
+      {/* Test Instructions */}
+      <Card variant="default" padding="md">
+        <CardHeader>
+          <CardTitle className="text-sm font-pixel">
+            Instrucciones de Prueba
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-2 text-sm text-stone-600">
+            <p><strong>QR Code:</strong> Visita la página /test para escanear</p>
+            <p><strong>World App:</strong> Usa el App ID configurado</p>
+            <p><strong>Debug:</strong> Revisa la consola del navegador</p>
           </div>
-        </div>
-
-        {/* Authentication Section */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">
-            🆔 World ID Authentication
-          </h3>
-          <p className="text-sm text-gray-600 mb-4">
-            Test the World ID verification flow with your app ID.
-          </p>
-          <AuthButton />
-        </div>
-
-        {/* Features Preview */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">
-            🚀 Coming Soon
-          </h3>
-          <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <div className="flex items-center">
-                <span className="text-2xl mr-3">👥</span>
-                <span className="text-sm font-medium">Profile Management</span>
-              </div>
-              <span className="text-xs text-gray-500">Mock Ready</span>
-            </div>
-
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <div className="flex items-center">
-                <span className="text-2xl mr-3">🛍️</span>
-                <span className="text-sm font-medium">Service Directory</span>
-              </div>
-              <span className="text-xs text-gray-500">Mock Ready</span>
-            </div>
-
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <div className="flex items-center">
-                <span className="text-2xl mr-3">🔒</span>
-                <span className="text-sm font-medium">Pay-to-Reveal</span>
-              </div>
-              <span className="text-xs text-gray-500">Mock Ready</span>
-            </div>
-
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <div className="flex items-center">
-                <span className="text-2xl mr-3">💰</span>
-                <span className="text-sm font-medium">Escrow Deals</span>
-              </div>
-              <span className="text-xs text-gray-500">Mock Ready</span>
-            </div>
-
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <div className="flex items-center">
-                <span className="text-2xl mr-3">⭐</span>
-                <span className="text-sm font-medium">Reputation System</span>
-              </div>
-              <span className="text-xs text-gray-500">Mock Ready</span>
-            </div>
+          <div className="mt-4">
+            <Button variant="outline" size="sm">
+              <a href="/test">📱 Obtener QR</a>
+            </Button>
           </div>
-        </div>
+        </CardContent>
+      </Card>
 
-        {/* Test Instructions */}
-        <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-          <h4 className="text-sm font-semibold text-blue-800 mb-2">
-            📱 Testing Instructions
-          </h4>
-          <ol className="text-xs text-blue-700 space-y-1">
-            <li>1. <strong>QR Code:</strong> Visit /test page for QR code to scan</li>
-            <li>2. <strong>Direct URL:</strong> https://7dd17759b4f2.ngrok-free.app/</li>
-            <li>3. <strong>World App:</strong> Use App ID {process.env.NEXT_PUBLIC_WORLD_ID_APP_ID}</li>
-            <li>4. <strong>Debug:</strong> Check browser console for MiniKit info</li>
-          </ol>
-          <div className="mt-3">
-            <a
-              href="/test"
-              className="inline-block px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700"
-            >
-              📱 Get QR Code
-            </a>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center mt-8 text-xs text-gray-500">
-          <p>Built with Next.js 15 + MiniKit + World ID</p>
-          <p>Frontend Testing Environment v1.0</p>
-        </div>
+      {/* Footer */}
+      <div className="text-center mt-8 text-sm text-stone-500">
+        <p className="font-pixel text-xs uppercase tracking-wide">
+          Xambatlán • Mercado de Confianza Descentralizado
+        </p>
+        <p className="text-xs">
+          Construido con Next.js 15 + MiniKit + World ID + Blockchain
+        </p>
       </div>
-    </main>
+    </Layout>
   );
 }

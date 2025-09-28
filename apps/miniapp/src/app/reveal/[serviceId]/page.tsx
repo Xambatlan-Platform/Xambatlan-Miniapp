@@ -1,9 +1,29 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Button } from '@worldcoin/mini-apps-ui-kit-react';
 import { useUser } from '@/contexts/UserContext';
 import { useRouter, useParams } from 'next/navigation';
+import {
+  Layout,
+  Section,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+  Button,
+  Badge,
+  ProgressBar,
+  StarIcon,
+  CoinIcon,
+  EyeIcon,
+  LockIcon,
+  ShieldIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  UserIcon,
+} from '@/components/ui';
 
 interface Service {
   id: string;
@@ -500,14 +520,16 @@ export default function RevealContactPage() {
 
   if (isLoading || isLoadingService) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 p-4">
-        <div className="max-w-md mx-auto pt-8">
+      <Layout variant="centered" showLogo={false}>
+        <Card variant="temple" padding="xl">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600">Loading...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-jade-300 border-t-jade-700 mx-auto mb-4"></div>
+            <p className="text-lg font-pixel text-jade-700 uppercase tracking-wide">
+              Cargando Servicio...
+            </p>
           </div>
-        </div>
-      </div>
+        </Card>
+      </Layout>
     );
   }
 
@@ -516,17 +538,21 @@ export default function RevealContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 p-4">
-      <div className="max-w-md mx-auto pt-4">
-        {/* Header */}
-        <div className="flex items-center space-x-3 mb-6">
-          <Button
-            onClick={() => router.push('/services')}
-            size="sm"
-            variant="secondary"
-          >
-            ← Back
-          </Button>
+    <Layout
+      title="Revelar Contacto"
+      subtitle="Accede a información de contacto del proveedor"
+      variant="marketplace"
+    >
+      {/* Header Navigation */}
+      <div className="flex items-center justify-between mb-6">
+        <Button
+          onClick={() => router.push('/services')}
+          size="md"
+          variant="ghost"
+          leftIcon={<ArrowLeftIcon size="sm" />}
+        >
+          Volver
+        </Button>
           <h1 className="text-xl font-bold text-gray-900">Reveal Contact</h1>
         </div>
 
@@ -628,7 +654,7 @@ export default function RevealContactPage() {
           <div className="bg-white rounded-lg shadow-lg p-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">Reveal Request Status</h3>
 
-            {revealRequest.status === 'PENDING' && !contactInfo && (
+            {revealRequest.status === 'PENDING' && (
               <div className="text-center py-6">
                 <div className="animate-pulse">
                   <div className="text-4xl mb-4">⏳</div>
@@ -649,9 +675,10 @@ export default function RevealContactPage() {
                       <Button
                         onClick={async () => {
                           console.log('✅ Simulating provider consent...');
-                          // Update request status and reveal contact
-                          setRevealRequest(prev => prev ? {...prev, status: 'APPROVED'} : null);
+                          // First reveal contact info
                           await checkRevealStatus();
+                          // Then update request status
+                          setRevealRequest(prev => prev ? {...prev, status: 'APPROVED'} : null);
                         }}
                         variant="primary"
                         size="sm"

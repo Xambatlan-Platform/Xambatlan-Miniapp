@@ -1,9 +1,30 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Button } from '@worldcoin/mini-apps-ui-kit-react';
 import { useUser } from '@/contexts/UserContext';
 import { useRouter } from 'next/navigation';
+import {
+  Layout,
+  Section,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+  Button,
+  Badge,
+  Grid,
+  ToolsIcon,
+  ArtisanIcon,
+  UserIcon,
+  StarIcon,
+  CoinIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  EyeIcon,
+  BadgeIcon,
+} from '@/components/ui';
 
 interface Service {
   id: string;
@@ -30,10 +51,12 @@ interface Service {
 }
 
 const categories = [
-  { slug: 'construccion', name: 'Construction & Building', nameEs: 'Construcción y Albañilería', icon: '🏗️' },
-  { slug: 'tecnologia', name: 'Technology & IT', nameEs: 'Tecnología e Informática', icon: '💻' },
-  { slug: 'limpieza', name: 'Cleaning Services', nameEs: 'Servicios de Limpieza', icon: '🧹' },
-  { slug: 'jardineria', name: 'Gardening & Landscaping', nameEs: 'Jardinería y Paisajismo', icon: '🌱' },
+  { slug: 'construccion', name: 'Construction & Building', nameEs: 'Construcción y Albañilería', icon: <ArtisanIcon size="md" />, emoji: '🏗️' },
+  { slug: 'tecnologia', name: 'Technology & IT', nameEs: 'Tecnología e Informática', icon: <ToolsIcon size="md" />, emoji: '💻' },
+  { slug: 'limpieza', name: 'Cleaning Services', nameEs: 'Servicios de Limpieza', icon: <ToolsIcon size="md" />, emoji: '🧹' },
+  { slug: 'jardineria', name: 'Gardening & Landscaping', nameEs: 'Jardinería y Paisajismo', icon: <ToolsIcon size="md" />, emoji: '🌱' },
+  { slug: 'plomeria', name: 'Plumbing', nameEs: 'Plomería', icon: <ToolsIcon size="md" />, emoji: '🔧' },
+  { slug: 'electricidad', name: 'Electrical', nameEs: 'Electricidad', icon: <ToolsIcon size="md" />, emoji: '⚡' },
 ];
 
 export default function ServicesPage() {
@@ -80,7 +103,7 @@ export default function ServicesPage() {
             category: 'construccion',
             title: 'House Repairs & Masonry',
             description: 'Professional house repairs, wall building, concrete work, and general masonry services.',
-            priceModel: 'HOURLY',
+            priceModel: 'HOURLY' as 'HOURLY' | 'FIXED',
             price: 25.0,
             currency: 'USDC',
             active: true,
@@ -102,7 +125,7 @@ export default function ServicesPage() {
             category: 'tecnologia',
             title: 'Web Development & IT Support',
             description: 'Custom websites, e-commerce solutions, and ongoing IT support for small businesses.',
-            priceModel: 'FIXED',
+            priceModel: 'FIXED' as 'HOURLY' | 'FIXED',
             price: 500.0,
             currency: 'USDC',
             active: true,
@@ -123,7 +146,7 @@ export default function ServicesPage() {
             category: 'limpieza',
             title: 'Deep House Cleaning Services',
             description: 'Professional deep cleaning for homes and offices. Weekly, bi-weekly, or one-time service.',
-            priceModel: 'FIXED',
+            priceModel: 'FIXED' as 'HOURLY' | 'FIXED',
             price: 80.0,
             currency: 'USDC',
             active: true,
@@ -144,7 +167,7 @@ export default function ServicesPage() {
             category: 'jardineria',
             title: 'Garden Design & Maintenance',
             description: 'Complete garden design, landscaping, and maintenance services for residential properties.',
-            priceModel: 'HOURLY',
+            priceModel: 'HOURLY' as 'HOURLY' | 'FIXED',
             price: 35.0,
             currency: 'USDC',
             active: true,
@@ -165,7 +188,7 @@ export default function ServicesPage() {
             category: 'plomeria',
             title: 'Emergency Plumbing Repairs',
             description: '24/7 emergency plumbing services. Leak repairs, pipe installation, and drain cleaning.',
-            priceModel: 'HOURLY',
+            priceModel: 'HOURLY' as 'HOURLY' | 'FIXED',
             price: 45.0,
             currency: 'USDC',
             active: true,
@@ -292,14 +315,16 @@ export default function ServicesPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 p-4">
-        <div className="max-w-md mx-auto pt-8">
+      <Layout variant="centered" showLogo={false}>
+        <Card variant="temple" padding="xl">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600">Loading...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-jade-300 border-t-jade-700 mx-auto mb-4"></div>
+            <p className="text-lg font-pixel text-jade-700 uppercase tracking-wide">
+              Cargando Servicios...
+            </p>
           </div>
-        </div>
-      </div>
+        </Card>
+      </Layout>
     );
   }
 
@@ -308,215 +333,268 @@ export default function ServicesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 p-4">
-      <div className="max-w-md mx-auto pt-4">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center space-x-3">
-            <Button
-              onClick={() => router.push('/profile')}
-              size="sm"
-              variant="secondary"
-            >
-              ← Back
-            </Button>
-            <h1 className="text-xl font-bold text-gray-900">Services</h1>
-          </div>
-          {profile?.type === 'PROVIDER' && (
-            <Button
-              onClick={() => setShowCreateService(true)}
-              size="sm"
-              variant="primary"
-            >
-              + Add
-            </Button>
-          )}
-        </div>
-
-        {showCreateService && profile?.type === 'PROVIDER' && (
-          /* Create Service Form */
-          <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">Create New Service</h2>
-
-            <div className="space-y-4">
-              {/* Category */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Category
-                </label>
-                <select
-                  value={serviceForm.category}
-                  onChange={(e) => setServiceForm(prev => ({ ...prev, category: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                >
-                  {categories.map((cat) => (
-                    <option key={cat.slug} value={cat.slug}>
-                      {cat.icon} {cat.nameEs}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Title */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Service Title
-                </label>
-                <input
-                  type="text"
-                  value={serviceForm.title}
-                  onChange={(e) => setServiceForm(prev => ({ ...prev, title: e.target.value }))}
-                  placeholder="e.g., House Repairs & Masonry"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                />
-              </div>
-
-              {/* Description */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Description
-                </label>
-                <textarea
-                  value={serviceForm.description}
-                  onChange={(e) => setServiceForm(prev => ({ ...prev, description: e.target.value }))}
-                  placeholder="Describe your service in detail"
-                  rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                />
-              </div>
-
-              {/* Price Model */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Pricing
-                </label>
-                <div className="flex space-x-3 mb-3">
-                  <button
-                    onClick={() => setServiceForm(prev => ({ ...prev, priceModel: 'HOURLY' }))}
-                    className={`flex-1 px-4 py-2 rounded-lg border text-sm ${
-                      serviceForm.priceModel === 'HOURLY'
-                        ? 'bg-purple-100 border-purple-500 text-purple-700'
-                        : 'bg-gray-50 border-gray-200 text-gray-600'
-                    }`}
-                  >
-                    Hourly Rate
-                  </button>
-                  <button
-                    onClick={() => setServiceForm(prev => ({ ...prev, priceModel: 'FIXED' }))}
-                    className={`flex-1 px-4 py-2 rounded-lg border text-sm ${
-                      serviceForm.priceModel === 'FIXED'
-                        ? 'bg-purple-100 border-purple-500 text-purple-700'
-                        : 'bg-gray-50 border-gray-200 text-gray-600'
-                    }`}
-                  >
-                    Fixed Price
-                  </button>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm text-gray-500">$</span>
-                  <input
-                    type="number"
-                    value={serviceForm.price}
-                    onChange={(e) => setServiceForm(prev => ({ ...prev, price: e.target.value }))}
-                    placeholder="0.00"
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  />
-                  <span className="text-sm text-gray-500">
-                    USDC {serviceForm.priceModel === 'HOURLY' ? '/hour' : 'total'}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Actions */}
-            <div className="flex space-x-3 mt-6">
-              <Button
-                onClick={() => setShowCreateService(false)}
-                variant="secondary"
-                size="lg"
-                className="flex-1"
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={handleCreateService}
-                disabled={isSubmitting || !serviceForm.title || !serviceForm.description || !serviceForm.price}
-                variant="primary"
-                size="lg"
-                className="flex-1"
-              >
-                {isSubmitting ? 'Creating...' : 'Create Service'}
-              </Button>
-            </div>
-          </div>
+    <Layout
+      title={profile?.type === 'PROVIDER' ? 'Mis Servicios' : 'Mercado de Servicios'}
+      subtitle={profile?.type === 'PROVIDER' ? 'Gestiona tus servicios y gana reputación' : 'Encuentra artesanos y profesionales verificados'}
+      variant="marketplace"
+    >
+      {/* Header Navigation */}
+      <div className="flex items-center justify-between mb-6">
+        <Button
+          onClick={() => router.push('/profile')}
+          size="md"
+          variant="ghost"
+          leftIcon={<ArrowLeftIcon size="sm" />}
+        >
+          Volver
+        </Button>
+        {profile?.type === 'PROVIDER' && (
+          <Button
+            onClick={() => setShowCreateService(true)}
+            size="md"
+            variant="primary"
+            leftIcon={<ToolsIcon size="sm" />}
+          >
+            Crear Servicio
+          </Button>
         )}
+      </div>
 
-        {/* Category Filter */}
-        <div className="bg-white rounded-lg shadow-lg p-4 mb-6">
-          <h3 className="text-sm font-medium text-gray-700 mb-3">Categories</h3>
-          <div className="flex flex-wrap gap-2">
+      {showCreateService && profile?.type === 'PROVIDER' && (
+        <Section>
+          <Card variant="temple" padding="lg">
+            <CardHeader withBorder>
+              <CardTitle aztec>
+                <ToolsIcon size="lg" className="text-jade-700" />
+                Crear Nuevo Servicio
+              </CardTitle>
+              <CardDescription>
+                Agrega un servicio al mercado y comienza a construir tu reputación
+              </CardDescription>
+            </CardHeader>
+
+            <CardContent>
+              <div className="space-y-6">
+                {/* Category */}
+                <div>
+                  <label className="block text-base font-pixel font-medium text-obsidian-800 mb-3 uppercase tracking-wide">
+                    Categoría
+                  </label>
+                  <select
+                    value={serviceForm.category}
+                    onChange={(e) => setServiceForm(prev => ({ ...prev, category: e.target.value }))}
+                    className="w-full px-4 py-3 text-base border-2 border-jade-200 rounded-aztec focus:ring-2 focus:ring-jade-300 focus:border-jade-400 transition-colors touch-target bg-jade-50"
+                  >
+                    {categories.map((cat) => (
+                      <option key={cat.slug} value={cat.slug}>
+                        {cat.emoji} {cat.nameEs}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Title */}
+                <div>
+                  <label className="block text-base font-pixel font-medium text-obsidian-800 mb-3 uppercase tracking-wide">
+                    Título del Servicio
+                  </label>
+                  <input
+                    type="text"
+                    value={serviceForm.title}
+                    onChange={(e) => setServiceForm(prev => ({ ...prev, title: e.target.value }))}
+                    placeholder="ej. Reparaciones de Casa y Albañilería"
+                    className="w-full px-4 py-3 text-base border-2 border-jade-200 rounded-aztec focus:ring-2 focus:ring-jade-300 focus:border-jade-400 transition-colors touch-target bg-jade-50"
+                  />
+                </div>
+
+                {/* Description */}
+                <div>
+                  <label className="block text-base font-pixel font-medium text-obsidian-800 mb-3 uppercase tracking-wide">
+                    Descripción
+                  </label>
+                  <textarea
+                    value={serviceForm.description}
+                    onChange={(e) => setServiceForm(prev => ({ ...prev, description: e.target.value }))}
+                    placeholder="Describe tu servicio en detalle, experiencia y qué incluye"
+                    rows={4}
+                    className="w-full px-4 py-3 text-base border-2 border-jade-200 rounded-aztec focus:ring-2 focus:ring-jade-300 focus:border-jade-400 transition-colors bg-jade-50 resize-none"
+                  />
+                </div>
+
+                {/* Price Model */}
+                <div>
+                  <label className="block text-base font-pixel font-medium text-obsidian-800 mb-3 uppercase tracking-wide">
+                    <CoinIcon size="sm" className="inline mr-2" />
+                    Modelo de Precio
+                  </label>
+                  <Grid cols={2} gap="sm" className="mb-4">
+                    <button
+                      onClick={() => setServiceForm(prev => ({ ...prev, priceModel: 'HOURLY' }))}
+                      className={`flex flex-col items-center gap-2 p-4 rounded-pyramid border-2 transition-all touch-target ${
+                        serviceForm.priceModel === 'HOURLY'
+                          ? 'bg-jade-100 border-jade-500 text-jade-800 shadow-pixel'
+                          : 'bg-jade-50 border-jade-200 text-jade-600 hover:border-jade-300'
+                      }`}
+                    >
+                      <CoinIcon size="lg" />
+                      <span className="font-pixel text-sm uppercase">Por Hora</span>
+                    </button>
+                    <button
+                      onClick={() => setServiceForm(prev => ({ ...prev, priceModel: 'FIXED' }))}
+                      className={`flex flex-col items-center gap-2 p-4 rounded-pyramid border-2 transition-all touch-target ${
+                        serviceForm.priceModel === 'FIXED'
+                          ? 'bg-teal-100 border-teal-500 text-teal-800 shadow-pixel'
+                          : 'bg-teal-50 border-teal-200 text-teal-600 hover:border-teal-300'
+                      }`}
+                    >
+                      <CoinIcon size="lg" />
+                      <span className="font-pixel text-sm uppercase">Precio Fijo</span>
+                    </button>
+                  </Grid>
+                  <div className="flex items-center gap-3">
+                    <span className="text-lg font-pixel font-bold text-obsidian-800">$</span>
+                    <input
+                      type="number"
+                      value={serviceForm.price}
+                      onChange={(e) => setServiceForm(prev => ({ ...prev, price: e.target.value }))}
+                      placeholder="0.00"
+                      className="flex-1 px-4 py-3 text-lg font-mono border-2 border-jade-200 rounded-aztec focus:ring-2 focus:ring-jade-300 focus:border-jade-400 transition-colors touch-target bg-jade-50"
+                    />
+                    <Badge variant="gold" size="md">
+                      USDC {serviceForm.priceModel === 'HOURLY' ? '/hora' : 'total'}
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+
+            <CardFooter>
+              <div className="flex gap-3 w-full">
+                <Button
+                  onClick={() => setShowCreateService(false)}
+                  variant="secondary"
+                  size="lg"
+                  className="flex-1"
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  onClick={handleCreateService}
+                  disabled={isSubmitting || !serviceForm.title || !serviceForm.description || !serviceForm.price}
+                  variant="primary"
+                  size="lg"
+                  className="flex-1"
+                  isLoading={isSubmitting}
+                >
+                  {isSubmitting ? 'Creando...' : 'Crear Servicio'}
+                </Button>
+              </div>
+            </CardFooter>
+          </Card>
+        </Section>
+      )}
+
+      {/* Category Filter */}
+      <Section title="Filtrar por Categoría">
+        <Card variant="default" padding="md">
+          <div className="flex flex-wrap gap-3">
             <button
               onClick={() => setSelectedCategory('')}
-              className={`px-3 py-2 rounded-lg text-sm border ${
+              className={`flex items-center gap-2 px-4 py-3 rounded-pyramid border-2 transition-all font-medium touch-target ${
                 selectedCategory === ''
-                  ? 'bg-purple-100 border-purple-500 text-purple-700'
-                  : 'bg-gray-50 border-gray-200 text-gray-600'
+                  ? 'bg-jade-100 border-jade-500 text-jade-800 shadow-pixel'
+                  : 'bg-jade-50 border-jade-200 text-jade-600 hover:border-jade-300'
               }`}
             >
-              All
+              <ToolsIcon size="sm" />
+              <span className="font-pixel text-sm uppercase">Todos</span>
             </button>
             {categories.map((cat) => (
               <button
                 key={cat.slug}
                 onClick={() => setSelectedCategory(cat.slug)}
-                className={`px-3 py-2 rounded-lg text-sm border ${
+                className={`flex items-center gap-2 px-4 py-3 rounded-pyramid border-2 transition-all font-medium touch-target ${
                   selectedCategory === cat.slug
-                    ? 'bg-purple-100 border-purple-500 text-purple-700'
-                    : 'bg-gray-50 border-gray-200 text-gray-600'
+                    ? 'bg-teal-100 border-teal-500 text-teal-800 shadow-pixel'
+                    : 'bg-teal-50 border-teal-200 text-teal-600 hover:border-teal-300'
                 }`}
               >
-                {cat.icon} {cat.nameEs}
+                {cat.icon}
+                <span className="font-pixel text-sm uppercase">{cat.nameEs}</span>
               </button>
             ))}
           </div>
-        </div>
+        </Card>
+      </Section>
 
-        {/* Services List */}
+      {/* Services List */}
+      <Section title={`${selectedCategory ? categories.find(c => c.slug === selectedCategory)?.nameEs : 'Todos los Servicios'}`}>
         <div className="space-y-4">
           {isLoadingServices ? (
-            <div className="text-center py-8">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
-              <p className="mt-2 text-gray-600">Loading services...</p>
-            </div>
+            <Card variant="temple" padding="xl">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-8 w-8 border-4 border-jade-300 border-t-jade-700 mx-auto mb-4"></div>
+                <p className="text-base font-pixel text-jade-700 uppercase tracking-wide">
+                  Cargando servicios...
+                </p>
+              </div>
+            </Card>
           ) : services.length === 0 ? (
-            <div className="text-center py-8 bg-white rounded-lg shadow-lg">
-              <p className="text-gray-600">No services found</p>
-              {profile?.type === 'PROVIDER' && (
-                <Button
-                  onClick={() => setShowCreateService(true)}
-                  variant="primary"
-                  size="lg"
-                  className="mt-4"
-                >
-                  Create Your First Service
-                </Button>
-              )}
-            </div>
+            <Card variant="marketplace" padding="xl">
+              <div className="text-center">
+                <ToolsIcon size="2xl" className="text-stone-400 mx-auto mb-4" />
+                <h3 className="text-lg font-pixel font-semibold text-obsidian-800 uppercase tracking-wide mb-2">
+                  No hay servicios
+                </h3>
+                <p className="text-base text-stone-600 mb-6">
+                  {selectedCategory
+                    ? `No encontramos servicios en la categoría ${categories.find(c => c.slug === selectedCategory)?.nameEs}`
+                    : 'Aún no hay servicios publicados'
+                  }
+                </p>
+                {profile?.type === 'PROVIDER' && (
+                  <Button
+                    onClick={() => setShowCreateService(true)}
+                    variant="primary"
+                    size="lg"
+                    leftIcon={<ToolsIcon size="md" />}
+                  >
+                    Crear tu Primer Servicio
+                  </Button>
+                )}
+              </div>
+            </Card>
           ) : (
             services.map((service) => (
-              <div key={service.id} className="bg-white rounded-lg shadow-lg p-6">
+              <Card key={service.id} variant="marketplace" padding="lg" hoverable>
                 {/* Provider Info */}
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="text-2xl">{service.provider.avatarEmoji}</div>
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="text-4xl">{service.provider.avatarEmoji}</div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-gray-800">{service.provider.username}</h3>
-                    <div className="flex items-center space-x-2 text-sm text-gray-600">
-                      <span>⭐ {service.provider.reputationScore.toFixed(1)}</span>
-                      <span>•</span>
-                      <span>{service.provider.totalReviews} reviews</span>
-                      <div className="flex space-x-1">
+                    <h3 className="text-lg font-pixel font-semibold text-obsidian-800 uppercase tracking-wide mb-1">
+                      {service.provider.username}
+                    </h3>
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="flex items-center gap-1">
+                        <div className="flex gap-1">
+                          {[...Array(5)].map((_, i) => (
+                            <StarIcon
+                              key={i}
+                              size="xs"
+                              filled={i < Math.floor(service.provider.reputationScore)}
+                              className="text-gold-500"
+                            />
+                          ))}
+                        </div>
+                        <span className="font-medium text-obsidian-700">
+                          {service.provider.reputationScore.toFixed(1)}
+                        </span>
+                      </div>
+                      <span className="text-stone-500">•</span>
+                      <span className="text-obsidian-700">{service.provider.totalReviews} reseñas</span>
+                      <div className="flex gap-1">
                         {service.provider.badges.map((badge, index) => (
-                          <span key={index} title={badge.title}>
+                          <span key={index} title={badge.title} className="text-lg">
                             {badge.iconUrl}
                           </span>
                         ))}
@@ -526,21 +604,26 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Service Details */}
-                <div className="mb-4">
-                  <h4 className="text-lg font-semibold text-gray-800 mb-2">{service.title}</h4>
-                  <p className="text-gray-600 text-sm mb-3">{service.description}</p>
+                <div className="mb-6">
+                  <h4 className="text-xl font-pixel font-bold text-obsidian-900 uppercase tracking-wide mb-3">
+                    {service.title}
+                  </h4>
+                  <p className="text-base text-obsidian-700 leading-relaxed mb-4">{service.description}</p>
 
                   <div className="flex items-center justify-between">
-                    <div className="text-lg font-bold text-purple-600">
-                      ${service.price} {service.currency}
-                      <span className="text-sm font-normal text-gray-500">
-                        {service.priceModel === 'HOURLY' ? '/hour' : ' total'}
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-2xl font-pixel font-bold text-jade-700">
+                        ${service.price}
                       </span>
+                      <Badge variant="gold" size="md">
+                        {service.currency} {service.priceModel === 'HOURLY' ? '/hora' : 'total'}
+                      </Badge>
                     </div>
-                    <div className="text-sm text-gray-500">
-                      {categories.find(c => c.slug === service.category)?.icon} {
-                        categories.find(c => c.slug === service.category)?.nameEs
-                      }
+                    <div className="flex items-center gap-2 text-sm">
+                      {categories.find(c => c.slug === service.category)?.icon}
+                      <span className="font-medium text-obsidian-700">
+                        {categories.find(c => c.slug === service.category)?.nameEs}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -552,31 +635,38 @@ export default function ServicesPage() {
                     variant="primary"
                     size="lg"
                     className="w-full"
+                    leftIcon={<EyeIcon size="md" />}
+                    rightIcon={<ArrowRightIcon size="sm" />}
                   >
-                    💬 Get Contact
+                    Revelar Contacto
                   </Button>
                 )}
                 {/* Show button for testing even if you're a provider */}
                 {profile?.type === 'PROVIDER' && service.ownerId !== user?.id && (
                   <Button
                     onClick={() => handleRevealContact(service.id, service.ownerId)}
-                    variant="secondary"
+                    variant="outline"
                     size="lg"
                     className="w-full"
+                    leftIcon={<EyeIcon size="md" />}
+                    rightIcon={<ArrowRightIcon size="sm" />}
                   >
-                    💬 Test Pay-to-Reveal (Demo)
+                    Probar Pago-por-Revelar (Demo)
                   </Button>
                 )}
                 {service.ownerId === user?.id && (
-                  <div className="text-center text-sm text-gray-500 py-2">
-                    This is your service
+                  <div className="text-center py-4">
+                    <Badge variant="success" size="md">
+                      <BadgeIcon size="xs" className="mr-1" />
+                      Tu Servicio
+                    </Badge>
                   </div>
                 )}
-              </div>
+              </Card>
             ))
           )}
         </div>
-      </div>
-    </div>
+      </Section>
+    </Layout>
   );
 }
