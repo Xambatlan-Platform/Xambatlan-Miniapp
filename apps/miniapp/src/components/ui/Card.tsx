@@ -2,9 +2,10 @@ import { HTMLAttributes, forwardRef } from 'react';
 import { clsx } from 'clsx';
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'temple' | 'marketplace' | 'profile';
-  padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+  variant?: 'default' | 'temple' | 'marketplace' | 'profile' | 'tenochtitlan' | 'obsidian';
+  padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   hoverable?: boolean;
+  glow?: boolean;
 }
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
@@ -14,35 +15,58 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       variant = 'default',
       padding = 'md',
       hoverable = false,
+      glow = false,
       children,
       ...props
     },
     ref
   ) => {
     const baseClasses = [
-      'relative bg-white rounded-temple border-2',
-      'transition-all duration-200 ease-in-out',
-      'shadow-temple',
-    ];
+      'relative rounded-none border-4',
+      'transition-all duration-100 ease-linear',
+      'shadow-pixel-authentic',
+      // Enhanced pixel-perfect edges for authentic retro look
+      'box-border pixel-art',
+      // Glow effect when enabled
+      glow && 'shadow-jade-glow',
+      // High contrast text for readability
+      'text-high-contrast',
+    ].filter(Boolean);
 
     const variantClasses = {
       default: [
-        'border-jade-200',
-        hoverable && 'hover:border-jade-300 hover:shadow-xl',
+        'bg-white border-obsidian-900',
+        'text-obsidian-900 text-high-contrast',
+        hoverable && 'hover:border-obsidian-700 hover:shadow-pixel-authentic',
       ],
       temple: [
-        'border-jade-300 bg-temple-gradient',
-        'shadow-pixel-lg',
-        hoverable && 'hover:transform hover:scale-[1.02]',
+        'bg-gradient-to-br from-jade-50 via-jade-100 to-jade-200',
+        'border-obsidian-900 text-obsidian-900 text-high-contrast',
+        'shadow-pixel-authentic',
+        hoverable && 'hover:transform hover:translate-x-1 hover:translate-y-1 hover:shadow-tenochtitlan',
+      ],
+      tenochtitlan: [
+        'bg-gradient-to-br from-teal-100 via-jade-100 to-quetzal-100',
+        'border-obsidian-900 text-obsidian-900 text-high-contrast',
+        'shadow-pixel-authentic',
+        hoverable && 'hover:shadow-jade-glow hover:translate-x-1 hover:translate-y-1',
+      ],
+      obsidian: [
+        'bg-gradient-to-br from-obsidian-100 via-stone-100 to-jade-50',
+        'border-obsidian-900 text-obsidian-900 text-high-contrast',
+        'shadow-pixel-authentic',
+        hoverable && 'hover:border-obsidian-700 hover:translate-x-1 hover:translate-y-1',
       ],
       marketplace: [
-        'border-teal-200',
-        'hover:border-teal-300 hover:shadow-xl',
+        'bg-gradient-to-br from-white via-jade-50 to-quetzal-50',
+        'border-obsidian-900 text-obsidian-900 text-high-contrast',
+        'hover:border-obsidian-700 hover:shadow-pixel-authentic',
         'cursor-pointer',
       ],
       profile: [
-        'border-gold-200 bg-gradient-to-br from-jade-50 to-gold-50',
-        hoverable && 'hover:border-gold-300',
+        'bg-gradient-to-br from-gold-50 via-jade-50 to-coral-50',
+        'border-obsidian-900 text-obsidian-900 text-high-contrast',
+        hoverable && 'hover:border-obsidian-700 hover:shadow-gold-glow hover:translate-x-1 hover:translate-y-1',
       ],
     };
 
@@ -52,6 +76,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       md: 'p-4',
       lg: 'p-6',
       xl: 'p-8',
+      '2xl': 'p-12',
     };
 
     return (

@@ -223,7 +223,7 @@ export default function RevealContactPage() {
             category: 'construccion',
             title: 'House Repairs & Masonry',
             description: 'Professional house repairs, wall building, concrete work, and general masonry services.',
-            priceModel: 'HOURLY',
+            priceModel: 'HOURLY' as 'HOURLY' | 'FIXED',
             price: 25.0,
             currency: 'USDC',
             provider: {
@@ -249,7 +249,7 @@ export default function RevealContactPage() {
             category: 'tecnologia',
             title: 'Web Development & IT Support',
             description: 'Custom websites, e-commerce solutions, and ongoing IT support for small businesses.',
-            priceModel: 'FIXED',
+            priceModel: 'FIXED' as 'HOURLY' | 'FIXED',
             price: 500.0,
             currency: 'USDC',
             provider: {
@@ -274,7 +274,7 @@ export default function RevealContactPage() {
             category: 'limpieza',
             title: 'Deep House Cleaning Services',
             description: 'Professional deep cleaning for homes and offices. Weekly, bi-weekly, or one-time service.',
-            priceModel: 'FIXED',
+            priceModel: 'FIXED' as 'HOURLY' | 'FIXED',
             price: 80.0,
             currency: 'USDC',
             provider: {
@@ -299,7 +299,7 @@ export default function RevealContactPage() {
             category: 'jardineria',
             title: 'Garden Design & Maintenance',
             description: 'Complete garden design, landscaping, and maintenance services for residential properties.',
-            priceModel: 'HOURLY',
+            priceModel: 'HOURLY' as 'HOURLY' | 'FIXED',
             price: 35.0,
             currency: 'USDC',
             provider: {
@@ -324,7 +324,7 @@ export default function RevealContactPage() {
             category: 'plomeria',
             title: 'Emergency Plumbing Repairs',
             description: '24/7 emergency plumbing services. Leak repairs, pipe installation, and drain cleaning.',
-            priceModel: 'HOURLY',
+            priceModel: 'HOURLY' as 'HOURLY' | 'FIXED',
             price: 45.0,
             currency: 'USDC',
             provider: {
@@ -372,7 +372,7 @@ export default function RevealContactPage() {
         category: 'general',
         title: 'Service Details',
         description: 'Service description not available',
-        priceModel: 'FIXED',
+        priceModel: 'FIXED' as 'HOURLY' | 'FIXED',
         price: 50.0,
         currency: 'USDC',
         provider: {
@@ -476,8 +476,8 @@ export default function RevealContactPage() {
         console.log('🌐 Ngrok detected - simulating contact info reveal');
         await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate delay
 
-        // Use the contact info from the service data
-        const mockContactInfo = service?.provider.encryptedContact || {
+        // Use the contact info from the service data (from the detailed mock services)
+        const mockContactInfo = (service?.provider as any)?.encryptedContact || {
           whatsapp: '+52 55 1234 5678',
           email: 'contact@example.com',
           website: 'example.com'
@@ -523,7 +523,7 @@ export default function RevealContactPage() {
       <Layout variant="centered" showLogo={false}>
         <Card variant="temple" padding="xl">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-jade-300 border-t-jade-700 mx-auto mb-4"></div>
+            <div className="rounded-full h-12 w-12 border-4 border-jade-300 border-t-jade-700 mx-auto mb-4"></div>
             <p className="text-lg font-pixel text-jade-700 uppercase tracking-wide">
               Cargando Servicio...
             </p>
@@ -539,250 +539,360 @@ export default function RevealContactPage() {
 
   return (
     <Layout
-      title="Revelar Contacto"
-      subtitle="Accede a información de contacto del proveedor"
-      variant="marketplace"
+      title="🔮 RITUAL DE REVELACIÓN 🔮"
+      subtitle="Accede a los secretos sagrados del artesano"
+      variant="temple"
     >
       {/* Header Navigation */}
       <div className="flex items-center justify-between mb-6">
         <Button
           onClick={() => router.push('/services')}
-          size="md"
+          size="xl"
           variant="ghost"
-          leftIcon={<ArrowLeftIcon size="sm" />}
+          leftIcon={<ArrowLeftIcon size="md" />}
+          className="font-pixel"
         >
-          Volver
+          🔙 VOLVER AL MERCADO
         </Button>
-          <h1 className="text-xl font-bold text-gray-900">Reveal Contact</h1>
-        </div>
+      </div>
 
-        {/* Service Card */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <div className="flex items-center space-x-3 mb-4">
-            <div className="text-3xl">{service.provider.avatarEmoji}</div>
-            <div className="flex-1">
-              <h2 className="text-lg font-bold text-gray-800">{service.provider.username}</h2>
-              <div className="flex items-center space-x-2 text-sm text-gray-600">
-                <span>⭐ {service.provider.reputationScore.toFixed(1)}</span>
-                <span>•</span>
-                <span>{service.provider.totalReviews} reviews</span>
-                <div className="flex space-x-1">
-                  {service.provider.badges.map((badge, index) => (
-                    <span key={index} title={badge.title}>
-                      {badge.iconUrl}
+      {/* Service Card - Temple Style */}
+      <Section>
+        <Card variant="tenochtitlan" padding="xl" className="border-4 border-obsidian-900">
+          <CardHeader>
+            <div className="flex items-center gap-6 mb-6">
+              <div className="text-6xl bg-jade-100 p-4 border-4 border-obsidian-900 shadow-pixel-authentic">
+                {service.provider.avatarEmoji}
+              </div>
+              <div className="flex-1">
+                <CardTitle className="text-2xl font-aztec text-obsidian-900 uppercase tracking-widest mb-2">
+                  <UserIcon size="lg" className="inline mr-2" />
+                  {service.provider.username}
+                </CardTitle>
+                <div className="flex items-center gap-4 text-base">
+                  <div className="flex items-center gap-2">
+                    <div className="flex gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <StarIcon
+                          key={i}
+                          size="sm"
+                          filled={i < Math.floor(service.provider.reputationScore)}
+                          className="text-gold-500"
+                        />
+                      ))}
+                    </div>
+                    <span className="font-pixel font-bold text-obsidian-900 text-high-contrast">
+                      {service.provider.reputationScore.toFixed(1)}
                     </span>
-                  ))}
+                  </div>
+                  <span className="text-obsidian-700">•</span>
+                  <span className="text-obsidian-900 text-high-contrast font-semibold">
+                    {service.provider.totalReviews} reseñas
+                  </span>
+                  <div className="flex gap-2">
+                    {service.provider.badges.map((badge, index) => (
+                      <Badge key={index} variant="gold" size="sm">
+                        <span title={badge.title}>{badge.iconUrl}</span>
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </CardHeader>
 
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">{service.title}</h3>
-          <p className="text-gray-600 text-sm mb-4">{service.description}</p>
+          <CardContent>
+            <CardTitle className="text-xl font-pixel font-bold text-obsidian-900 uppercase tracking-wide mb-4">
+              🏛️ {service.title}
+            </CardTitle>
+            <CardDescription className="text-base text-obsidian-900 text-high-contrast leading-relaxed mb-6">
+              {service.description}
+            </CardDescription>
 
-          <div className="text-lg font-bold text-purple-600">
-            ${service.price} {service.currency}
-            <span className="text-sm font-normal text-gray-500">
-              {service.priceModel === 'HOURLY' ? '/hour' : ' total'}
-            </span>
-          </div>
-        </div>
-
-        {!revealRequest && (
-          /* Payment Form */
-          <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Pay to Reveal Contact</h3>
-
-            <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">
-              <div className="flex items-center space-x-2 mb-2">
-                <span className="text-2xl">💰</span>
-                <span className="text-lg font-bold text-purple-700">$5.00 USDC</span>
+            <div className="flex items-center justify-between p-4 bg-gold-100 border-4 border-obsidian-900 shadow-pixel-authentic">
+              <div className="flex items-baseline gap-3">
+                <CoinIcon size="lg" className="text-gold-600" />
+                <span className="text-3xl font-pixel font-bold text-obsidian-900">
+                  ${service.price}
+                </span>
+                <Badge variant="gold" size="lg">
+                  {service.currency} {service.priceModel === 'HOURLY' ? '/hora' : 'total'}
+                </Badge>
               </div>
-              <p className="text-sm text-purple-600">
-                One-time fee to unlock provider's contact information
-              </p>
             </div>
+          </CardContent>
+        </Card>
+      </Section>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Message to Provider (Optional)
-              </label>
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Introduce yourself and describe your project..."
-                rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-              />
-            </div>
+      {!revealRequest && (
+        /* Sacred Payment Altar */
+        <Section>
+          <Card variant="obsidian" padding="xl" className="border-4 border-obsidian-900">
+            <CardHeader>
+              <CardTitle className="text-2xl font-aztec text-obsidian-900 uppercase tracking-widest text-center">
+                <ShieldIcon size="lg" className="inline mr-2" />
+                🔮 ALTAR DE REVELACIÓN 🔮
+              </CardTitle>
+              <CardDescription className="text-center text-base text-obsidian-900 text-high-contrast">
+                Realiza la ofrenda sagrada para acceder a los secretos del artesano
+              </CardDescription>
+            </CardHeader>
 
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4">
-              <h4 className="text-sm font-semibold text-yellow-800 mb-2">How it works:</h4>
-              <ul className="text-sm text-yellow-700 space-y-1">
-                <li>1. You pay $5 USDC to request contact info</li>
-                <li>2. Provider receives notification and your message</li>
-                <li>3. Provider must consent to reveal their contact</li>
-                <li>4. Once approved, you get their contact details</li>
-              </ul>
-            </div>
-
-            <Button
-              onClick={handlePayToReveal}
-              disabled={isSubmitting || paymentStatus === 'processing'}
-              variant="primary"
-              size="lg"
-              className="w-full"
-            >
-              {paymentStatus === 'processing'
-                ? '💸 Processing Payment...'
-                : isSubmitting
-                  ? 'Creating Request...'
-                  : '💰 Pay $5 USDC to Reveal Contact'
-              }
-            </Button>
-
-            {paymentStatus === 'failed' && (
-              <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-                <p className="text-sm text-red-800">❌ Payment failed. Please try again.</p>
+            <CardContent className="space-y-6">
+              {/* Sacred Offering Display */}
+              <div className="p-6 bg-gradient-to-br from-gold-100 to-gold-200 border-4 border-obsidian-900 shadow-pixel-authentic text-center">
+                <div className="flex items-center justify-center gap-4 mb-4">
+                  <CoinIcon size="2xl" className="text-gold-600" />
+                  <span className="text-4xl font-pixel font-bold text-obsidian-900">$5.00</span>
+                  <Badge variant="gold" size="lg">USDC</Badge>
+                </div>
+                <p className="text-base font-bold text-obsidian-900 text-high-contrast">
+                  💰 Ofrenda única para desbloquear información de contacto
+                </p>
               </div>
-            )}
-          </div>
-        )}
 
-        {revealRequest && (
-          /* Request Status */
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Reveal Request Status</h3>
+              {/* Sacred Message */}
+              <div>
+                <label className="block text-base font-pixel font-medium text-obsidian-900 text-high-contrast mb-3 uppercase tracking-wide">
+                  📜 Mensaje al Artesano (Opcional)
+                </label>
+                <textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Preséntate y describe tu proyecto sagrado..."
+                  rows={4}
+                  className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-4 border-obsidian-900 focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors resize-none placeholder:text-stone-500 text-high-contrast pixel-art"
+                />
+              </div>
 
-            {revealRequest.status === 'PENDING' && (
-              <div className="text-center py-6">
-                <div className="animate-pulse">
-                  <div className="text-4xl mb-4">⏳</div>
-                  <h4 className="text-lg font-semibold text-gray-800 mb-2">Waiting for Provider Approval</h4>
-                  <p className="text-sm text-gray-600 mb-4">
-                    Your payment was successful! The provider has been notified and will respond shortly.
-                  </p>
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
-                    <p className="text-sm text-blue-700">
-                      Request expires: {new Date(revealRequest.expiresAt).toLocaleString()}
-                    </p>
+              {/* Sacred Instructions */}
+              <div className="p-6 bg-gradient-to-br from-quetzal-100 to-quetzal-200 border-4 border-obsidian-900 shadow-pixel-authentic">
+                <h4 className="text-lg font-pixel font-bold text-obsidian-900 text-high-contrast uppercase tracking-wide mb-4">
+                  🏛️ Ritual de Revelación:
+                </h4>
+                <div className="space-y-3 text-base text-obsidian-900 text-high-contrast">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">1️⃣</span>
+                    <span>Ofreces $5 USDC para solicitar información de contacto</span>
                   </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">2️⃣</span>
+                    <span>El artesano recibe notificación divina y tu mensaje</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">3️⃣</span>
+                    <span>El artesano debe dar consentimiento para revelar su contacto</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">4️⃣</span>
+                    <span>Una vez aprobado, obtienes sus detalles de contacto</span>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
 
-                  {/* Testing Simulation Buttons */}
-                  <div className="space-y-3 mt-6">
-                    <p className="text-xs text-gray-500 mb-2">Testing Simulation:</p>
-                    <div className="flex space-x-2">
-                      <Button
-                        onClick={async () => {
-                          console.log('✅ Simulating provider consent...');
-                          // First reveal contact info
-                          await checkRevealStatus();
-                          // Then update request status
-                          setRevealRequest(prev => prev ? {...prev, status: 'APPROVED'} : null);
-                        }}
-                        variant="primary"
-                        size="sm"
-                        className="flex-1"
-                      >
-                        ✅ Simulate Provider Consent
-                      </Button>
-                      <Button
-                        onClick={() => {
-                          console.log('❌ Simulating provider rejection...');
-                          setRevealRequest(prev => prev ? {...prev, status: 'DENIED'} : null);
-                        }}
-                        variant="secondary"
-                        size="sm"
-                        className="flex-1"
-                      >
-                        ❌ Simulate Provider Rejection
-                      </Button>
+            <CardFooter>
+              <Button
+                onClick={handlePayToReveal}
+                disabled={isSubmitting || paymentStatus === 'processing'}
+                variant="tenochtitlan"
+                size="3xl"
+                className="w-full"
+                leftIcon={<CoinIcon size="lg" />}
+                isLoading={isSubmitting || paymentStatus === 'processing'}
+              >
+                {paymentStatus === 'processing'
+                  ? '💸 PROCESANDO OFRENDA...'
+                  : isSubmitting
+                    ? '🔮 CREANDO RITUAL...'
+                    : '💰 PAGAR $5 USDC PARA REVELAR'
+                }
+              </Button>
+
+              {paymentStatus === 'failed' && (
+                <div className="mt-6 p-4 bg-coral-100 border-4 border-obsidian-900 shadow-pixel-authentic">
+                  <p className="text-base font-bold text-obsidian-900 text-high-contrast text-center">
+                    ❌ La ofrenda falló. Por favor intenta nuevamente.
+                  </p>
+                </div>
+              )}
+            </CardFooter>
+          </Card>
+        </Section>
+      )}
+
+      {revealRequest && (
+        /* Sacred Status Oracle */
+        <Section>
+          <Card variant="temple" padding="xl" className="border-4 border-obsidian-900">
+            <CardHeader>
+              <CardTitle className="text-2xl font-aztec text-obsidian-900 uppercase tracking-widest text-center">
+                <EyeIcon size="lg" className="inline mr-2" />
+                🔮 ESTADO DEL RITUAL 🔮
+              </CardTitle>
+            </CardHeader>
+
+            <CardContent>
+              {revealRequest.status === 'PENDING' && (
+                <div className="text-center py-8">
+                  <div>
+                    <div className="text-8xl mb-6">⏳</div>
+                    <CardTitle className="text-xl font-pixel text-obsidian-900 uppercase tracking-wide mb-4">
+                      🏛️ Esperando Bendición del Artesano
+                    </CardTitle>
+                    <CardDescription className="text-base text-obsidian-900 text-high-contrast mb-6">
+                      ¡Tu ofrenda fue exitosa! El artesano ha sido notificado y responderá pronto bajo la guía divina.
+                    </CardDescription>
+
+                    <div className="p-4 bg-jade-100 border-4 border-obsidian-900 shadow-pixel-authentic mb-6">
+                      <p className="text-base font-bold text-obsidian-900 text-high-contrast">
+                        ⏰ El ritual expira: {new Date(revealRequest.expiresAt).toLocaleString()}
+                      </p>
+                    </div>
+
+                    {/* Testing Simulation Buttons */}
+                    <div className="space-y-4 mt-8">
+                      <p className="text-sm font-pixel text-obsidian-700 uppercase tracking-wide mb-4">
+                        🧪 Simulación de Prueba:
+                      </p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <Button
+                          onClick={async () => {
+                            console.log('✅ Simulating provider consent...');
+                            // First reveal contact info
+                            await checkRevealStatus();
+                            // Then update request status
+                            setRevealRequest(prev => prev ? {...prev, status: 'APPROVED'} : null);
+                          }}
+                          variant="tenochtitlan"
+                          size="xl"
+                          className="w-full"
+                          leftIcon={<ShieldIcon size="md" />}
+                        >
+                          ✅ SIMULAR CONSENTIMIENTO
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            console.log('❌ Simulating provider rejection...');
+                            setRevealRequest(prev => prev ? {...prev, status: 'DENIED'} : null);
+                          }}
+                          variant="outline"
+                          size="xl"
+                          className="w-full"
+                          leftIcon={<LockIcon size="md" />}
+                        >
+                          ❌ SIMULAR RECHAZO
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {revealRequest.status === 'APPROVED' && contactInfo && (
-              <div className="space-y-4">
-                <div className="text-center py-4">
-                  <div className="text-4xl mb-2">✅</div>
-                  <h4 className="text-lg font-semibold text-green-700">Contact Revealed!</h4>
-                  <p className="text-sm text-gray-600">Provider has approved your request</p>
+              {revealRequest.status === 'APPROVED' && contactInfo && (
+                <div className="space-y-6">
+                  <div className="text-center py-6">
+                    <div className="text-8xl mb-4">✅</div>
+                    <CardTitle className="text-xl font-pixel text-obsidian-900 uppercase tracking-wide mb-2">
+                      🎉 ¡CONTACTO REVELADO!
+                    </CardTitle>
+                    <CardDescription className="text-base text-obsidian-900 text-high-contrast">
+                      El artesano ha bendecido tu solicitud con su consentimiento divino
+                    </CardDescription>
+                  </div>
+
+                  <div className="p-6 bg-gradient-to-br from-jade-100 to-jade-200 border-4 border-obsidian-900 shadow-pixel-authentic">
+                    <h5 className="text-lg font-pixel font-bold text-obsidian-900 text-high-contrast uppercase tracking-wide mb-6">
+                      🗝️ Información de Contacto Sagrada:
+                    </h5>
+                    <div className="space-y-4">
+                      {contactInfo.whatsapp && (
+                        <div className="p-4 bg-white border-4 border-obsidian-900 shadow-pixel-authentic">
+                          <div className="flex items-center gap-3 mb-2">
+                            <span className="text-2xl">📱</span>
+                            <span className="font-pixel text-base text-obsidian-900 text-high-contrast font-bold">WhatsApp:</span>
+                          </div>
+                          <div className="ml-8">
+                            <a
+                              href={`https://wa.me/${contactInfo.whatsapp.replace(/\D/g, '')}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-jade-700 font-mono text-base underline hover:text-jade-900 transition-colors break-all"
+                            >
+                              {contactInfo.whatsapp}
+                            </a>
+                          </div>
+                        </div>
+                      )}
+                      {contactInfo.email && (
+                        <div className="p-4 bg-white border-4 border-obsidian-900 shadow-pixel-authentic">
+                          <div className="flex items-center gap-3 mb-2">
+                            <span className="text-2xl">📧</span>
+                            <span className="font-pixel text-base text-obsidian-900 text-high-contrast font-bold">Email:</span>
+                          </div>
+                          <div className="ml-8">
+                            <a
+                              href={`mailto:${contactInfo.email}`}
+                              className="text-jade-700 font-mono text-base underline hover:text-jade-900 transition-colors break-all"
+                            >
+                              {contactInfo.email}
+                            </a>
+                          </div>
+                        </div>
+                      )}
+                      {contactInfo.website && (
+                        <div className="p-4 bg-white border-4 border-obsidian-900 shadow-pixel-authentic">
+                          <div className="flex items-center gap-3 mb-2">
+                            <span className="text-2xl">🌐</span>
+                            <span className="font-pixel text-base text-obsidian-900 text-high-contrast font-bold">Website:</span>
+                          </div>
+                          <div className="ml-8">
+                            <a
+                              href={contactInfo.website}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-jade-700 font-mono text-base underline hover:text-jade-900 transition-colors break-all"
+                            >
+                              {contactInfo.website}
+                            </a>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <Button
+                    onClick={() => router.push('/deals')}
+                    variant="tenochtitlan"
+                    size="3xl"
+                    className="w-full"
+                    leftIcon={<ArrowRightIcon size="lg" />}
+                  >
+                    🤝 CREAR ACUERDO CON ARTESANO
+                  </Button>
                 </div>
+              )}
 
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                  <h5 className="font-semibold text-green-800 mb-3">Contact Information:</h5>
-                  <div className="space-y-2">
-                    {contactInfo.whatsapp && (
-                      <div className="flex items-center space-x-2">
-                        <span className="text-green-600">📱</span>
-                        <span className="text-sm">WhatsApp:</span>
-                        <a
-                          href={`https://wa.me/${contactInfo.whatsapp.replace(/\D/g, '')}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-green-600 font-mono underline"
-                        >
-                          {contactInfo.whatsapp}
-                        </a>
-                      </div>
-                    )}
-                    {contactInfo.email && (
-                      <div className="flex items-center space-x-2">
-                        <span className="text-green-600">📧</span>
-                        <span className="text-sm">Email:</span>
-                        <a
-                          href={`mailto:${contactInfo.email}`}
-                          className="text-green-600 font-mono underline"
-                        >
-                          {contactInfo.email}
-                        </a>
-                      </div>
-                    )}
-                    {contactInfo.website && (
-                      <div className="flex items-center space-x-2">
-                        <span className="text-green-600">🌐</span>
-                        <span className="text-sm">Website:</span>
-                        <a
-                          href={contactInfo.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-green-600 font-mono underline"
-                        >
-                          {contactInfo.website}
-                        </a>
-                      </div>
-                    )}
+              {revealRequest.status === 'DENIED' && (
+                <div className="text-center py-8">
+                  <div className="text-8xl mb-6">❌</div>
+                  <CardTitle className="text-xl font-pixel text-obsidian-900 uppercase tracking-wide mb-4">
+                    🚫 SOLICITUD DENEGADA
+                  </CardTitle>
+                  <CardDescription className="text-base text-obsidian-900 text-high-contrast mb-6">
+                    El artesano ha decidido no compartir su información de contacto en este momento.
+                  </CardDescription>
+                  <div className="p-4 bg-coral-100 border-4 border-obsidian-900 shadow-pixel-authentic">
+                    <p className="text-base font-bold text-obsidian-900 text-high-contrast">
+                      💰 Tu pago será reembolsado automáticamente por los guardianes del templo.
+                    </p>
                   </div>
                 </div>
-
-                <Button
-                  onClick={() => router.push('/deals')}
-                  variant="primary"
-                  size="lg"
-                  className="w-full"
-                >
-                  🤝 Create Deal with Provider
-                </Button>
-              </div>
-            )}
-
-            {revealRequest.status === 'DENIED' && (
-              <div className="text-center py-6">
-                <div className="text-4xl mb-4">❌</div>
-                <h4 className="text-lg font-semibold text-red-700 mb-2">Request Denied</h4>
-                <p className="text-sm text-gray-600 mb-4">
-                  The provider declined to share their contact information.
-                </p>
-                <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-                  <p className="text-sm text-red-700">Your payment will be refunded automatically.</p>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-    </div>
+              )}
+            </CardContent>
+          </Card>
+        </Section>
+      )}
+    </Layout>
   );
 }

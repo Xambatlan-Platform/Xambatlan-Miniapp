@@ -136,7 +136,7 @@ export default function ProfilePage() {
       <Layout variant="centered" showLogo={false}>
         <Card variant="temple" padding="xl">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-jade-300 border-t-jade-700 mx-auto mb-4"></div>
+            <div className="rounded-full h-12 w-12 border-4 border-jade-300 border-t-jade-700 mx-auto mb-4"></div>
             <p className="text-lg font-pixel text-jade-700 uppercase tracking-wide">
               Cargando Perfil...
             </p>
@@ -189,16 +189,16 @@ export default function ProfilePage() {
               <div className="space-y-6">
                 {/* Profile Type */}
                 <div>
-                  <label className="block text-base font-pixel font-medium text-obsidian-800 mb-3 uppercase tracking-wide">
+                  <label className="block text-base font-pixel font-medium text-obsidian-900 text-high-contrast mb-3 uppercase tracking-wide">
                     Soy:
                   </label>
                   <Grid cols={2} gap="sm">
                     <button
                       onClick={() => setFormData(prev => ({ ...prev, type: 'PROVIDER' }))}
-                      className={`flex flex-col items-center gap-2 p-4 rounded-pyramid border-2 transition-all touch-target ${
+                      className={`flex flex-col items-center gap-2 p-4 border-4 shadow-pixel-authentic pixel-art transition-all touch-target ${
                         formData.type === 'PROVIDER'
-                          ? 'bg-jade-100 border-jade-500 text-jade-800 shadow-pixel'
-                          : 'bg-jade-50 border-jade-200 text-jade-600 hover:border-jade-300'
+                          ? 'bg-jade-100 border-obsidian-900 text-obsidian-900 text-high-contrast shadow-pixel'
+                          : 'bg-jade-50 border-obsidian-900 text-obsidian-900 hover:bg-jade-100'
                       }`}
                     >
                       <ArtisanIcon size="xl" />
@@ -206,10 +206,10 @@ export default function ProfilePage() {
                     </button>
                     <button
                       onClick={() => setFormData(prev => ({ ...prev, type: 'CLIENT' }))}
-                      className={`flex flex-col items-center gap-2 p-4 rounded-pyramid border-2 transition-all touch-target ${
+                      className={`flex flex-col items-center gap-2 p-4 border-4 shadow-pixel-authentic pixel-art transition-all touch-target ${
                         formData.type === 'CLIENT'
-                          ? 'bg-teal-100 border-teal-500 text-teal-800 shadow-pixel'
-                          : 'bg-teal-50 border-teal-200 text-teal-600 hover:border-teal-300'
+                          ? 'bg-teal-100 border-obsidian-900 text-obsidian-900 text-high-contrast shadow-pixel'
+                          : 'bg-teal-50 border-obsidian-900 text-obsidian-900 hover:bg-teal-100'
                       }`}
                     >
                       <UserIcon size="xl" />
@@ -220,7 +220,7 @@ export default function ProfilePage() {
 
                 {/* Avatar Emoji */}
                 <div>
-                  <label className="block text-base font-pixel font-medium text-obsidian-800 mb-3 uppercase tracking-wide">
+                  <label className="block text-base font-pixel font-medium text-obsidian-900 text-high-contrast mb-3 uppercase tracking-wide">
                     Elige tu Avatar
                   </label>
                   <div className="grid grid-cols-6 gap-2">
@@ -228,10 +228,10 @@ export default function ProfilePage() {
                       <button
                         key={emoji}
                         onClick={() => setFormData(prev => ({ ...prev, avatarEmoji: emoji }))}
-                        className={`aspect-square text-2xl rounded-aztec border-2 transition-all touch-target ${
+                        className={`aspect-square text-2xl border-4 shadow-pixel-authentic pixel-art transition-all touch-target ${
                           formData.avatarEmoji === emoji
-                            ? 'bg-gold-100 border-gold-500 shadow-pixel'
-                            : 'bg-jade-50 border-jade-200 hover:border-jade-300'
+                            ? 'bg-gold-100 border-obsidian-900 shadow-pixel'
+                            : 'bg-jade-50 border-obsidian-900 hover:bg-jade-100'
                         }`}
                       >
                         {emoji}
@@ -242,7 +242,7 @@ export default function ProfilePage() {
 
                 {/* Username */}
                 <div>
-                  <label className="block text-base font-pixel font-medium text-obsidian-800 mb-3 uppercase tracking-wide">
+                  <label className="block text-base font-pixel font-medium text-obsidian-900 text-high-contrast mb-3 uppercase tracking-wide">
                     Nombre de Usuario
                   </label>
                   <input
@@ -250,13 +250,13 @@ export default function ProfilePage() {
                     value={formData.username}
                     onChange={(e) => setFormData(prev => ({ ...prev, username: e.target.value }))}
                     placeholder="Tu nombre en Xambatlán"
-                    className="w-full px-4 py-3 text-lg text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500"
+                    className="w-full px-4 py-3 text-lg text-obsidian-900 bg-white border-4 border-obsidian-900 pixel-art focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500 text-high-contrast"
                   />
                 </div>
 
                 {/* Bio */}
                 <div>
-                  <label className="block text-base font-pixel font-medium text-obsidian-800 mb-3 uppercase tracking-wide">
+                  <label className="block text-base font-pixel font-medium text-obsidian-900 text-high-contrast mb-3 uppercase tracking-wide">
                     Descripción
                   </label>
                   <textarea
@@ -267,13 +267,13 @@ export default function ProfilePage() {
                       : 'Cuéntanos sobre ti y qué tipo de servicios buscas'
                     }
                     rows={4}
-                    className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors resize-none placeholder:text-stone-500"
+                    className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-4 border-obsidian-900 pixel-art focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors resize-none placeholder:text-stone-500 text-high-contrast"
                   />
                 </div>
 
                 {/* Contact Information */}
                 <div>
-                  <label className="block text-base font-pixel font-medium text-obsidian-800 mb-3 uppercase tracking-wide">
+                  <label className="block text-base font-pixel font-medium text-obsidian-900 text-high-contrast mb-3 uppercase tracking-wide">
                     <LockIcon size="sm" className="inline mr-2" />
                     Información de Contacto (Encriptada)
                   </label>
@@ -286,7 +286,7 @@ export default function ProfilePage() {
                         contactInfo: { ...prev.contactInfo, whatsapp: e.target.value }
                       }))}
                       placeholder="Número de WhatsApp"
-                      className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500"
+                      className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-4 border-obsidian-900 pixel-art focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500 text-high-contrast"
                     />
                     <input
                       type="email"
@@ -296,7 +296,7 @@ export default function ProfilePage() {
                         contactInfo: { ...prev.contactInfo, email: e.target.value }
                       }))}
                       placeholder="Correo electrónico"
-                      className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500"
+                      className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-4 border-obsidian-900 pixel-art focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500 text-high-contrast"
                     />
                     <input
                       type="url"
@@ -306,7 +306,7 @@ export default function ProfilePage() {
                         contactInfo: { ...prev.contactInfo, website: e.target.value }
                       }))}
                       placeholder="Sitio web o redes sociales"
-                      className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500"
+                      className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-4 border-obsidian-900 pixel-art focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500 text-high-contrast"
                     />
                   </div>
                   <div className="mt-2 p-3 bg-gold-50 border border-gold-200 rounded-aztec">
@@ -397,7 +397,7 @@ export default function ProfilePage() {
             {/* Reputation Section */}
             <Card variant="temple" padding="md">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-pixel text-lg font-semibold text-obsidian-800 uppercase tracking-wide">
+                <h3 className="font-pixel text-lg font-semibold text-obsidian-900 text-high-contrast uppercase tracking-wide">
                   Reputación
                 </h3>
                 <div className="flex gap-1">

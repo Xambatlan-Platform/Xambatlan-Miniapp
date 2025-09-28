@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   experimental: {
     allowedRevalidateHeaderKeys: ['authorization', 'x-api-key'],
   },
-  allowedDevOrigins: ['https://7dd17759b4f2.ngrok-free.app'], // Your ngrok URL
+  allowedDevOrigins: ['https://527a74b84f75.ngrok-free.app'], // Your ngrok URL
   reactStrictMode: false,
 };
 

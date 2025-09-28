@@ -318,7 +318,7 @@ export default function ServicesPage() {
       <Layout variant="centered" showLogo={false}>
         <Card variant="temple" padding="xl">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-jade-300 border-t-jade-700 mx-auto mb-4"></div>
+            <div className="rounded-full h-12 w-12 border-4 border-jade-300 border-t-jade-700 mx-auto mb-4"></div>
             <p className="text-lg font-pixel text-jade-700 uppercase tracking-wide">
               Cargando Servicios...
             </p>
@@ -377,13 +377,13 @@ export default function ServicesPage() {
               <div className="space-y-6">
                 {/* Category */}
                 <div>
-                  <label className="block text-base font-pixel font-medium text-obsidian-800 mb-3 uppercase tracking-wide">
+                  <label className="block text-base font-pixel font-medium text-obsidian-900 text-high-contrast mb-3 uppercase tracking-wide">
                     Categoría
                   </label>
                   <select
                     value={serviceForm.category}
                     onChange={(e) => setServiceForm(prev => ({ ...prev, category: e.target.value }))}
-                    className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target"
+                    className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-4 border-obsidian-900 focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target text-high-contrast pixel-art"
                   >
                     {categories.map((cat) => (
                       <option key={cat.slug} value={cat.slug}>
@@ -395,7 +395,7 @@ export default function ServicesPage() {
 
                 {/* Title */}
                 <div>
-                  <label className="block text-base font-pixel font-medium text-obsidian-800 mb-3 uppercase tracking-wide">
+                  <label className="block text-base font-pixel font-medium text-obsidian-900 text-high-contrast mb-3 uppercase tracking-wide">
                     Título del Servicio
                   </label>
                   <input
@@ -403,13 +403,13 @@ export default function ServicesPage() {
                     value={serviceForm.title}
                     onChange={(e) => setServiceForm(prev => ({ ...prev, title: e.target.value }))}
                     placeholder="ej. Reparaciones de Casa y Albañilería"
-                    className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500"
+                    className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-4 border-obsidian-900 focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500 text-high-contrast pixel-art"
                   />
                 </div>
 
                 {/* Description */}
                 <div>
-                  <label className="block text-base font-pixel font-medium text-obsidian-800 mb-3 uppercase tracking-wide">
+                  <label className="block text-base font-pixel font-medium text-obsidian-900 text-high-contrast mb-3 uppercase tracking-wide">
                     Descripción
                   </label>
                   <textarea
@@ -417,23 +417,23 @@ export default function ServicesPage() {
                     onChange={(e) => setServiceForm(prev => ({ ...prev, description: e.target.value }))}
                     placeholder="Describe tu servicio en detalle, experiencia y qué incluye"
                     rows={4}
-                    className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors resize-none placeholder:text-stone-500"
+                    className="w-full px-4 py-3 text-base text-obsidian-900 bg-white border-4 border-obsidian-900 focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors resize-none placeholder:text-stone-500 text-high-contrast pixel-art"
                   />
                 </div>
 
                 {/* Price Model */}
                 <div>
-                  <label className="block text-base font-pixel font-medium text-obsidian-800 mb-3 uppercase tracking-wide">
+                  <label className="block text-base font-pixel font-medium text-obsidian-900 text-high-contrast mb-3 uppercase tracking-wide">
                     <CoinIcon size="sm" className="inline mr-2" />
                     Modelo de Precio
                   </label>
                   <Grid cols={2} gap="sm" className="mb-4">
                     <button
                       onClick={() => setServiceForm(prev => ({ ...prev, priceModel: 'HOURLY' }))}
-                      className={`flex flex-col items-center gap-2 p-4 rounded-pyramid border-2 transition-all touch-target ${
+                      className={`flex flex-col items-center gap-2 p-4 border-4 transition-all touch-target shadow-pixel-authentic pixel-art ${
                         serviceForm.priceModel === 'HOURLY'
-                          ? 'bg-jade-100 border-jade-500 text-jade-800 shadow-pixel'
-                          : 'bg-jade-50 border-jade-200 text-jade-600 hover:border-jade-300'
+                          ? 'bg-jade-100 border-obsidian-900 text-obsidian-900 text-high-contrast'
+                          : 'bg-jade-50 border-obsidian-900 text-obsidian-900 hover:bg-jade-100'
                       }`}
                     >
                       <CoinIcon size="lg" />
@@ -441,10 +441,10 @@ export default function ServicesPage() {
                     </button>
                     <button
                       onClick={() => setServiceForm(prev => ({ ...prev, priceModel: 'FIXED' }))}
-                      className={`flex flex-col items-center gap-2 p-4 rounded-pyramid border-2 transition-all touch-target ${
+                      className={`flex flex-col items-center gap-2 p-4 border-4 transition-all touch-target shadow-pixel-authentic pixel-art ${
                         serviceForm.priceModel === 'FIXED'
-                          ? 'bg-teal-100 border-teal-500 text-teal-800 shadow-pixel'
-                          : 'bg-teal-50 border-teal-200 text-teal-600 hover:border-teal-300'
+                          ? 'bg-teal-100 border-obsidian-900 text-obsidian-900 text-high-contrast'
+                          : 'bg-teal-50 border-obsidian-900 text-obsidian-900 hover:bg-teal-100'
                       }`}
                     >
                       <CoinIcon size="lg" />
@@ -452,13 +452,13 @@ export default function ServicesPage() {
                     </button>
                   </Grid>
                   <div className="flex items-center gap-3">
-                    <span className="text-lg font-pixel font-bold text-obsidian-800">$</span>
+                    <span className="text-lg font-pixel font-bold text-obsidian-900 text-high-contrast">$</span>
                     <input
                       type="number"
                       value={serviceForm.price}
                       onChange={(e) => setServiceForm(prev => ({ ...prev, price: e.target.value }))}
                       placeholder="0.00"
-                      className="flex-1 px-4 py-3 text-lg font-mono text-obsidian-900 bg-white border-2 border-jade-300 rounded-aztec focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500"
+                      className="flex-1 px-4 py-3 text-lg font-mono text-obsidian-900 bg-white border-4 border-obsidian-900 focus:ring-2 focus:ring-jade-500 focus:border-jade-600 focus:bg-jade-50 transition-colors touch-target placeholder:text-stone-500 text-high-contrast pixel-art"
                     />
                     <Badge variant="gold" size="md">
                       USDC {serviceForm.priceModel === 'HOURLY' ? '/hora' : 'total'}
@@ -500,10 +500,10 @@ export default function ServicesPage() {
           <div className="flex flex-wrap gap-3">
             <button
               onClick={() => setSelectedCategory('')}
-              className={`flex items-center gap-2 px-4 py-3 rounded-pyramid border-2 transition-all font-medium touch-target ${
+              className={`flex items-center gap-2 px-4 py-3 border-4 transition-all font-medium touch-target shadow-pixel-authentic pixel-art ${
                 selectedCategory === ''
-                  ? 'bg-jade-100 border-jade-500 text-jade-800 shadow-pixel'
-                  : 'bg-jade-50 border-jade-200 text-jade-600 hover:border-jade-300'
+                  ? 'bg-jade-100 border-obsidian-900 text-obsidian-900 text-high-contrast'
+                  : 'bg-jade-50 border-obsidian-900 text-obsidian-900 hover:bg-jade-100'
               }`}
             >
               <ToolsIcon size="sm" />
@@ -513,10 +513,10 @@ export default function ServicesPage() {
               <button
                 key={cat.slug}
                 onClick={() => setSelectedCategory(cat.slug)}
-                className={`flex items-center gap-2 px-4 py-3 rounded-pyramid border-2 transition-all font-medium touch-target ${
+                className={`flex items-center gap-2 px-4 py-3 border-4 transition-all font-medium touch-target shadow-pixel-authentic pixel-art ${
                   selectedCategory === cat.slug
-                    ? 'bg-teal-100 border-teal-500 text-teal-800 shadow-pixel'
-                    : 'bg-teal-50 border-teal-200 text-teal-600 hover:border-teal-300'
+                    ? 'bg-teal-100 border-obsidian-900 text-obsidian-900 text-high-contrast'
+                    : 'bg-teal-50 border-obsidian-900 text-obsidian-900 hover:bg-teal-100'
                 }`}
               >
                 {cat.icon}
@@ -533,7 +533,7 @@ export default function ServicesPage() {
           {isLoadingServices ? (
             <Card variant="temple" padding="xl">
               <div className="text-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-4 border-jade-300 border-t-jade-700 mx-auto mb-4"></div>
+                <div className="rounded-full h-8 w-8 border-4 border-jade-300 border-t-jade-700 mx-auto mb-4"></div>
                 <p className="text-base font-pixel text-jade-700 uppercase tracking-wide">
                   Cargando servicios...
                 </p>
@@ -543,7 +543,7 @@ export default function ServicesPage() {
             <Card variant="marketplace" padding="xl">
               <div className="text-center">
                 <ToolsIcon size="2xl" className="text-stone-400 mx-auto mb-4" />
-                <h3 className="text-lg font-pixel font-semibold text-obsidian-800 uppercase tracking-wide mb-2">
+                <h3 className="text-lg font-pixel font-semibold text-obsidian-900 text-high-contrast uppercase tracking-wide mb-2">
                   No hay servicios
                 </h3>
                 <p className="text-base text-stone-600 mb-6">
@@ -571,7 +571,7 @@ export default function ServicesPage() {
                 <div className="flex items-center gap-4 mb-6">
                   <div className="text-4xl">{service.provider.avatarEmoji}</div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-pixel font-semibold text-obsidian-800 uppercase tracking-wide mb-1">
+                    <h3 className="text-lg font-pixel font-semibold text-obsidian-900 text-high-contrast uppercase tracking-wide mb-1">
                       {service.provider.username}
                     </h3>
                     <div className="flex items-center gap-3 text-sm">
@@ -586,12 +586,12 @@ export default function ServicesPage() {
                             />
                           ))}
                         </div>
-                        <span className="font-medium text-obsidian-700">
+                        <span className="font-medium text-obsidian-900 text-high-contrast">
                           {service.provider.reputationScore.toFixed(1)}
                         </span>
                       </div>
                       <span className="text-stone-500">•</span>
-                      <span className="text-obsidian-700">{service.provider.totalReviews} reseñas</span>
+                      <span className="text-obsidian-900 text-high-contrast">{service.provider.totalReviews} reseñas</span>
                       <div className="flex gap-1">
                         {service.provider.badges.map((badge, index) => (
                           <span key={index} title={badge.title} className="text-lg">
@@ -608,7 +608,7 @@ export default function ServicesPage() {
                   <h4 className="text-xl font-pixel font-bold text-obsidian-900 uppercase tracking-wide mb-3">
                     {service.title}
                   </h4>
-                  <p className="text-base text-obsidian-700 leading-relaxed mb-4">{service.description}</p>
+                  <p className="text-base text-obsidian-900 text-high-contrast leading-relaxed mb-4">{service.description}</p>
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-baseline gap-2">
@@ -621,7 +621,7 @@ export default function ServicesPage() {
                     </div>
                     <div className="flex items-center gap-2 text-sm">
                       {categories.find(c => c.slug === service.category)?.icon}
-                      <span className="font-medium text-obsidian-700">
+                      <span className="font-medium text-obsidian-900 text-high-contrast">
                         {categories.find(c => c.slug === service.category)?.nameEs}
                       </span>
                     </div>
